@@ -40,8 +40,8 @@ class Solution:
 
 
 obj = Solution()
-print(obj.maxProfit([7,1,5,3,6,4]))     # 5
-print(obj.maxProfit([7,6,4,3,1]))       # 0
+print(obj.maxProfit([7, 1, 5, 3, 6, 4]))     # 5
+print(obj.maxProfit([7, 6, 4, 3, 1]))        # 0
 
 # T.C: O(N)
 # S.C: O(1)
