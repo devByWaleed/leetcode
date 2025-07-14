@@ -32,3 +32,6 @@ obj = Solution()
 print(obj.findDuplicate([1, 3, 4, 2, 2]))   # 2
 print(obj.findDuplicate([3, 1, 3, 4, 2]))   # 3
 print(obj.findDuplicate([3, 3, 3, 3, 3]))   # 3
+
+# T.C: O(N) 
+# S.C: O(1)
