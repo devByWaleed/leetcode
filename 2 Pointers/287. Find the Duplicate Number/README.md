@@ -28,7 +28,7 @@ Output: `3`
 
 ### Constraints:
 
-`1 <= n <= 105`
+`1 <= n <= 10^5`
 
 `nums.length == n + 1`
 

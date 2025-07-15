@@ -52,7 +52,7 @@ Explanation: Your function should return k = 5, with the first five elements of 
 
 ### Constraints:
 
-`1 <= nums.length <= 3 * 104`
+`1 <= nums.length <= 3 * 10^4`
 
 `-100 <= nums[i] <= 100`
 
