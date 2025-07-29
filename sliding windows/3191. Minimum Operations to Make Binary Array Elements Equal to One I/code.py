@@ -30,3 +30,6 @@ class Solution:
 obj = Solution()
 print(obj.minOperations([0, 1, 1, 1, 0, 0]))    # 3
 print(obj.minOperations([0, 1, 1, 1]))          # -1
+
+# T.C: O(N)
+# S.C: O(1)
