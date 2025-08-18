@@ -16,26 +16,51 @@ class Solution:
 
         window = s[:k]
 
+        # Counting vowels in first k elements
         for i in window:
             
             if i in vowels:
                 sub_vowel += 1
-            
-        # for j in range(k, len(s)):
 
+        # Updating after 1st k elements
+        max_vowels = sub_vowel
+
+        # Looping through remaining window
+        for j in range(k, len(s)):
+
+            # If current and previous is vowel, continue
+            if s[j-k] in vowels and s[j] in vowels:
+                # max_vowels = max(max_vowels, sub_vowel)
+                continue
+            
+            # If current is not vowel and previous is vowel, decrement count and update
+            elif s[j-k] in vowels and s[j] not in vowels:
+                sub_vowel -= 1
+                max_vowels = max(max_vowels, sub_vowel)
+            
+            # If current is vowel and previous is not vowel, increment count and update
+            elif s[j-k] not in vowels and s[j] in vowels:
+                sub_vowel += 1
+                max_vowels = max(max_vowels, sub_vowel)
+            
+        return max_vowels
 
 
 obj = Solution()
-print(obj.maxVowels("abciiidef", 3))    # 3
-print(obj.maxVowels("aeiou", 2))        # 2
-print(obj.maxVowels("leetcode", 3))     # 2
-print(obj.maxVowels("a", 1))            # 1
+print(obj.maxVowels("abciiidef", 3))                     # 3
+print(obj.maxVowels("aeiou", 2))                         # 2
+print(obj.maxVowels("leetcode", 3))                      # 2
+print(obj.maxVowels("a", 1))                             # 1
+print(obj.maxVowels("qempburycnhrvvccr", 13))            # 2
+
+# T.C: O(N)
+# S.C: O(1)
 
 
 
-
-
-'''class Solution:
+# Counting on each window from scratch (not optimal)
+'''
+class Solution:
     def maxVowels(self, s: str, k: int) -> int:
         
         # Hashset for vowel checking
@@ -75,4 +100,5 @@ obj = Solution()
 print(obj.maxVowels("abciiidef", 3))    # 3
 print(obj.maxVowels("aeiou", 2))        # 2
 print(obj.maxVowels("leetcode", 3))     # 2
-print(obj.maxVowels("a", 1))            # 1'''
+print(obj.maxVowels("a", 1))            # 1
+'''
