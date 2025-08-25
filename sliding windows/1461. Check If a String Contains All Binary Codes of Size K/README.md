@@ -33,7 +33,9 @@ Output `false`
 ### Constraints
 
 `1 <= s.length <= 5 * 10^5`
+
 `s[i] is either '0' or '1'.`
+
 `1 <= k <= 20`
 
 
