@@ -6,9 +6,32 @@ class ListNode:
         self.val = x
         self.next = None
 
+    # Customize this to show node value during de-bugging
+    def __repr__(self): 
+        return f"{self.val}"
+
+
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        pass
+        
+        # Initialize 2 pointers at head
+        slow, fast = head, head
+
+        # Condition for looping till end of list
+        while fast and fast.next:
+
+            # Moving slow pointer 1 time
+            slow = slow.next
+
+            # Moving slow pointer 2 time
+            fast = fast.next.next
+
+            # If pointers meet, cycle detected. Otherwise no cycle
+            if slow == fast:
+                return True
+            
+        return False
+
 
 obj = Solution()
 
@@ -37,3 +60,6 @@ print(obj.hasCycle(head))       # True
 # Create linked list:
 head = ListNode(1)  # No cycle created
 print(obj.hasCycle(head))       # False
+
+# T.C: O(N)
+# S.C: O(1)
