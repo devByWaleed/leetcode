@@ -13,7 +13,29 @@ class ListNode:
 
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+        
+        # Initialize 2 pointers at head
+        slow, fast = head, head
+
+        # Condition for looping till end of list
+        while fast and fast.next:
+
+            # Moving slow pointer 1 time
+            slow = slow.next
+
+            # Moving slow pointer 2 time
+            fast = fast.next.next
+
+        # For printing whole Linked-List
+        '''
+        while slow:
+            print(slow, end=" -> ")
+            slow = slow.next
+        '''
+
+        # Mid node will be on slow pointer
+        return slow
+
 
 obj = Solution()
 
@@ -36,3 +58,6 @@ head.next.next.next.next = ListNode(5)
 head.next.next.next.next.next = ListNode(6)
 # Process
 print(obj.middleNode(head))        # 4 -> 5 -> 6
+
+# T.C: O(N)
+# S.C: O(1)
