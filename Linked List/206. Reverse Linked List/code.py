@@ -60,20 +60,17 @@ head.next = ListNode(2)
 head.next.next = ListNode(3)
 head.next.next.next = ListNode(4)
 head.next.next.next.next = ListNode(5)
-# Reverse it
 print(obj.reverseList(head))        # 5 -> 4 -> 3 -> 2 -> 1
 
 
 # Create linked list:
 head = ListNode(1)
 head.next = ListNode(2)
-# Reverse it
 print(obj.reverseList(head))        # 2 -> 1
 
 
 # Create linked list:
 head = None
-# Reverse it
 print(obj.reverseList(head))        # None
 
 # T.C: O(N)

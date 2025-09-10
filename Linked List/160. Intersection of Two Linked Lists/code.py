@@ -13,7 +13,28 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        pass
+        
+        # 2 pointers at head of both lists
+        t1 = headA
+        t2 = headB
+
+        # Looping untill we get intersected value
+        while t1 != t2:
+
+            # Moving both pointers
+            t1 = t1.next
+            t2 = t2.next
+
+            if t1 == t2:
+                break       # As we get the value
+                # return t1
+
+            # On reaching end, move pointer to opposite head
+            if t1 == None:      t1 = headB
+            if t2 == None:      t2 = headA
+        
+        # After loop breaks, return t1
+        return t1
 
 
 obj = Solution()
@@ -66,3 +87,6 @@ headB.next = ListNode(5)
 
 # No intersection (different node references)
 print(obj.getIntersectionNode(headA, headB))        # None
+
+# T.C: O(M + N)
+# S.C: O(1)

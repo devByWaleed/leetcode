@@ -45,7 +45,6 @@ head.next = ListNode(2)
 head.next.next = ListNode(3)
 head.next.next.next = ListNode(4)
 head.next.next.next.next = ListNode(5)
-# Process
 print(obj.middleNode(head))        # 3 -> 4 -> 5
 
 
@@ -56,7 +55,6 @@ head.next.next = ListNode(3)
 head.next.next.next = ListNode(4)
 head.next.next.next.next = ListNode(5)
 head.next.next.next.next.next = ListNode(6)
-# Process
 print(obj.middleNode(head))        # 4 -> 5 -> 6
 
 # T.C: O(N)

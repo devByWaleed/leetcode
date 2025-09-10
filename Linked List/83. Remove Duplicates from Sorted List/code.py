@@ -46,7 +46,6 @@ obj = Solution()
 head = ListNode(1)
 head.next = ListNode(1)
 head.next.next = ListNode(2)
-# Process
 print(obj.deleteDuplicates(head))        # 1 -> 2
 
 
@@ -56,7 +55,6 @@ head.next = ListNode(1)
 head.next.next = ListNode(2)
 head.next.next.next = ListNode(3)
 head.next.next.next.next = ListNode(3)
-# Process
 print(obj.deleteDuplicates(head))        # 1 -> 2 -> 3
 
 # T.C: O(N)
