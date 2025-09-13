@@ -30,11 +30,11 @@ Output `[1]`
 
 `The number of nodes in the list is sz.`
 
-`1 = sz = 30`
+`1 <= sz <= 30`
 
-`0 = Node.val = 100`
+`0 <= Node.val <= 100`
 
-`1 = n = sz`
+`1 <= n <= sz`
 
  
 > Follow up Could you do this in one pass?
