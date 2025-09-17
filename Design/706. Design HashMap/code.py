@@ -1,19 +1,30 @@
 class MyHashMap:
 
     def __init__(self):
-        pass
+        # Initialize our hash-map
+        self.hash_map = {}
         
 
     def put(self, key: int, value: int) -> None:
-        pass
+        # Adding / Updating value
+        if key not in self.hash_map:
+            self.hash_map.update({key: value})
+        else:
+            self.hash_map[key] = value
         
 
     def get(self, key: int) -> int:
-        pass
+        # Retrieve the value, else -1
+        if key not in self.hash_map:
+            return -1
+        else:
+            return self.hash_map[key]
         
 
     def remove(self, key: int) -> None:
-        pass
+        # Remove the mapping
+        if key in self.hash_map:
+            self.hash_map.pop(key)
         
 
 
@@ -40,3 +51,6 @@ None
 None
 -1
 '''
+
+# T.C: O(1)
+# S.C: O(N)
