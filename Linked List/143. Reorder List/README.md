@@ -16,6 +16,7 @@ You are given the `head` of a singly linked-list. The list can be represented as
 <img src="reorder1.jpg" alt='Linked List' />
 
 Input `head = [1,2,3,4]`
+
 Output `[1,4,2,3]`
 
 
