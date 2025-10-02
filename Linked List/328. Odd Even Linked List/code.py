@@ -13,7 +13,35 @@ class ListNode:
 
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+
+        # Edge case
+        if not head or not head.next:
+            return head
+        
+        # Odd is traversing pointer, 
+        odd, even = head, head.next
+        
+        # even_head is even list reference
+        even_head = even
+
+        
+        while even and even.next:
+            odd.next = even.next    # Assigning next value
+            odd = odd.next      # Traversing
+            even.next = odd.next    # Assigning next value
+            even = even.next        # Traversing
+
+        # After loop, add even_head if remain
+        odd.next = even_head
+
+        # For printing whole Linked-List
+        '''
+        while head:
+            print(head, end=" -> ")
+            head = head.next
+        '''
+
+        return head
 
 
 obj = Solution()
@@ -34,3 +62,6 @@ head.next.next.next.next = ListNode(6)
 head.next.next.next.next.next = ListNode(4)
 head.next.next.next.next.next.next = ListNode(7)
 print(obj.oddEvenList(head))            # 2 -> 3 -> 6 -> 7 -> 1 -> 5 -> 4
+
+# T.C: O(N)
+# S.C: O(1)
