@@ -38,7 +38,7 @@ Output `""`
 
 ### Constraints
 
-`1 = s.length = 105`
+`1 <= s.length <= 10^5`
 
 `s[i] is either '(' , ')', or lowercase English letter.`
 
