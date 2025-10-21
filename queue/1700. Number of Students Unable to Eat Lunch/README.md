@@ -39,7 +39,7 @@ Output `3`
 
 ### Constraints
 
-`1 = students.length, sandwiches.length = 100`
+`1 <= students.length, sandwiches.length <= 100`
 
 `students.length == sandwiches.length`
 
