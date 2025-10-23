@@ -1,6 +1,23 @@
+from collections import deque
+
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
-        pass
+        
+        queue = []
+        # queue = deque()
+        count = 0
+
+        for i in range(1, n+1):
+            queue.append(i)
+
+
+        while len(queue) != 1:
+
+            count = (count + k) % len(queue) - 1
+            queue.pop(count)
+  
+
+        return queue[0]
 
 
 obj = Solution()
