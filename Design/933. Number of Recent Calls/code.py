@@ -1,11 +1,23 @@
+from collections import deque
+
 class RecentCounter:
 
     def __init__(self):
-        pass
+        # Initialize queue
+        self.queue = deque()
         
 
     def ping(self, t: int) -> int:
-        pass
+        
+        # Adding request to queue
+        self.queue.append(t)
+
+        # If current request is greater than 1st reuest, remove 1st element
+        while self.queue and t - 3000 > self.queue[0]:
+            self.queue.popleft()
+
+        # Queue size will dynamically track no. of requests
+        return len(self.queue)
         
 
 # Your RecentCounter object will be instantiated and called as such:
@@ -22,3 +34,6 @@ None
 3
 3
 """
+
+# T.C: O(1)
+# S.C: O(N)
