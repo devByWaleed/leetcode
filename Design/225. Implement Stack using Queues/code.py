@@ -1,23 +1,31 @@
+from collections import deque
+
 class MyStack:
 
     def __init__(self):
-        pass
+        self.main = deque()
+        self.outer = deque()
         
 
     def push(self, x: int) -> None:
-        pass
-        
+        self.outer.append(x)
+
+        while self.main:
+            self.outer.append(self.main.popleft())
+
+        self.main, self.outer = self.outer, self.main
+
 
     def pop(self) -> int:
-        pass
+        return self.main.popleft()
         
 
     def top(self) -> int:
-        pass
+        return self.main[0]
         
 
     def empty(self) -> bool:
-        pass
+        return len(self.main) == 0
         
 
 
@@ -37,3 +45,6 @@ None
 2
 False
 """
+
+# T.C: O(N)
+# S.C: O(N)
