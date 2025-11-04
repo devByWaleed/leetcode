@@ -1,72 +1,74 @@
-from collections import deque
-
 class MyCircularQueue:
 
     def __init__(self, k: int):
         self.k = k
-        # self.queue = []
         self.queue = [0] * self.k
         self.front_element = -1
         self.rear_element = -1
-        self.counter = 0 
-        # self.queue = deque(self.queue)
-        
+        self.counter = 0
+
 
     def enQueue(self, value: int) -> bool:
+
+        # Checking if queue is full or not
         if self.counter == self.k:
             return False
 
-
-        if (self.rear_element + 1) % self.k == self.front_element:
-            (self.front_element + 1) % self.k
-
-        elif self.front_element == -1:
+        # If queue is not full, then we can add the element
+        if self.front_element == -1:
             self.front_element = 0
-        
+
+        # Adding element and incrementing check counter
         self.rear_element = (self.rear_element + 1) % self.k
         self.queue[self.rear_element] = value
         self.counter += 1
         return True
-        
+
 
     def deQueue(self) -> bool:
-        if self.front_element == -1:
-            return False
-        
-        result = self.queue[self.front_element]
 
+        # Check for empty queue
+        if self.counter == 0:
+            return False
+
+        # Check that queue has 1 element
         if self.front_element == self.rear_element:
             self.front_element = -1
             self.rear_element = -1
+        # Move front element
         else:
             self.front_element = (self.front_element + 1) % self.k
 
+        # Operation successful
+        self.counter -= 1
         return True
-        
+
 
     def Front(self) -> int:
-        if self.front_element == -1:
+        # Check for empty queue
+        if self.counter == 0:
             return -1
         else:
-            return self.queue[0]
-            # return self.queue[self.front_element]
-        
+            return self.queue[self.front_element]
+
 
     def Rear(self) -> int:
-        if self.front_element == -1:
+        # Check for empty queue
+        if self.counter == 0:
             return -1
         else:
-            return self.queue[len(self.queue)-1]
-            # return self.queue[self.rear_element]
-        
-        
-    def isEmpty(self) -> bool:
-        return len(self.queue) == 0
-        
+            return self.queue[self.rear_element]
 
+
+    def isEmpty(self) -> bool:
+        # counter == 0, means queue is empty
+        return self.counter == 0
+
+    
     def isFull(self) -> bool:
-        return len(self.queue) != 0
-        
+        # counter == k, means queue is full
+        return self.counter == self.k
+
 
 
 # Your MyCircularQueue object will be instantiated and called as such:
@@ -93,3 +95,6 @@ True
 True
 4
 """
+
+# T.C: O(1)
+# S.C: O(K)
