@@ -31,3 +31,6 @@ print(obj.isValid("()[]{}"))    # True
 print(obj.isValid("(]"))        # False
 print(obj.isValid("([])"))      # True
 print(obj.isValid("([)]"))      # False
+
+# T.C: O(N)
+# S.C: O(N)
