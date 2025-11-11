@@ -11,9 +11,9 @@ Return the **time taken** for the person **initially** at position **k**(0-index
 
 **Example 1:**
 
-**Input:**tickets = [2,3,2], k = 2
+**Input:** tickets = [2,3,2], k = 2
 
-**Output:**6
+**Output:** 6
 
 **Explanation:**
 
@@ -28,9 +28,9 @@ Return the **time taken** for the person **initially** at position **k**(0-index
 
 **Example 2:**
 
-**Input:**tickets = [5,1,1,1], k = 0
+**Input:** tickets = [5,1,1,1], k = 0
 
-**Output:**8
+**Output:** 8
 
 **Explanation:**
 
