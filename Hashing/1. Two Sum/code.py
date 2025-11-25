@@ -1,5 +1,10 @@
 from typing import List
 
+'''
+For looking a number with current one to satisfy any condition,
+we use difference pattern (a mathematical perspective)
+'''
+
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
 

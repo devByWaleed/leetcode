@@ -1,5 +1,12 @@
 from typing import List
 
+'''
+Pattern: Accumulation / Running Product
+
+- prefix (1st pass) => answer[i] is product of all elements to left of "nums" array
+- suffix (2nd pass) => answer[i] is product of all elements to right+left (final answer) of "nums" array
+'''
+
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n = len(nums)

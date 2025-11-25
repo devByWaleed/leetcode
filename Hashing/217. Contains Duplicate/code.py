@@ -1,3 +1,7 @@
+'''
+Searching for element in hashset in O(1) time (practical perspective)
+'''
+
 class Solution:
     def containsDuplicate(self, nums: list[int]) -> bool:
         

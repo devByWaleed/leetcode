@@ -36,11 +36,11 @@ Output: `[0,1]`
 
 `-10^9 <= nums[i] <= 10^9`
 
-`-109 <= target <= 10^9`
+`-10^9 <= target <= 10^9`
 
 `Only one valid answer exists.`
  
-> Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
+> Follow-up: Can you come up with an algorithm that is less than O(n^2) time complexity?
 
 
 ### Topics
@@ -53,7 +53,7 @@ Output: `[0,1]`
 A really brute force way would be to search for all possible pairs of numbers but that would be too slow. Again, it's best to try out brute force solutions just for completeness. It is from these brute force solutions that you can come up with optimizations.
 
 ### Hint 2
-So, if we fix one of the numbers, say x, we have to scan the entire array to find the next number y which is value - x where value is the input parameter. Can we change our array somehow so that this search becomes faster?
+So, if we fix one of the numbers, say `x`, we have to scan the entire array to find the next number `y` which is `value - x` where value is the input parameter. Can we change our array somehow so that this search becomes faster?
 
 ### Hint 3
 The second train of thought is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?
