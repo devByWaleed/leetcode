@@ -1,5 +1,11 @@
 from typing import List
 
+'''
+- This problem divides into 3 parts. Counting-frequencies -> Sorting by frequency -> Adding k elements
+- We need to sort hash_map in descending order to get higher frequencies at top.
+- Then loop k times to get that element
+'''
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 
@@ -7,7 +13,7 @@ class Solution:
         count = {}
 
         # Array to save object (to be sorted)
-        frequencies = []
+        # frequencies = []
 
         # Array will save top k elements
         result = []
@@ -18,9 +24,9 @@ class Solution:
             count[i] = count.get(i, 0) + 1
 
         
-        for key, value in count.items():
+        # for key, value in count.items():
 
-            frequencies.append({value: key})
+        #     frequencies.append({value: key})
             # frequencies.append({key: value})
 
         # Sorting the array of objects in reverse order

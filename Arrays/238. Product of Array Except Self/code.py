@@ -44,4 +44,4 @@ print(obj.productExceptSelf([1, 2, 3, 4]))          # [24, 12, 8, 6]
 print(obj.productExceptSelf([-1, 1, 0, -3, 3]))     # [0, 0, 9, 0, 0]
 
 # T.C: O(N)
-# S.C: O(N)
+# S.C: O(1)
