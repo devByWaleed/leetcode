@@ -1,25 +1,37 @@
 from typing import List
 
+'''
+Approach:-
+
+Use 2 pointers. One point to 0 index and other points to last index
+
+While looping, check that sum of both numbers are less than to target. If yes, then all the numbers appears b/w those indices give same result. After that, increment left pointer.
+
+If sum is greater than target, then move right pointer
+
+Using difference technique will get all numbers sum which meets condition, reduces time complexity from N^2 to N. This is known as Monotonic Two-Pointer Principle
+
+'''
+
+
 class Solution:
     def countPairs(self, nums: List[int], target: int) -> int:
         
-        nums.sort()     # Sorting for 2-pointers
+        count = 0   # count total pairs
+        
+        nums.sort()     # To use 2 pointers
 
         n = len(nums)
+
         left, right = 0, n - 1
-        count = 0       # Counts the pairs
 
         while left < right:
-           
-           # If condition meets, all values b/w left & right will validate the condition
-            if (nums[left] + nums[right]) < target:
-                count += right - left
-                left += 1
-
-            # If total is not less than, then decrement right pointer
+            # If we find indices, then add all numbers in range
+            if nums[left] + nums[right] < target:
+                count += (right-left)
+                left += 1   # Increment left pointer
             else:
-                right -= 1
-
+                right -= 1  # Decrement right pointer
 
         return count
 
@@ -28,7 +40,7 @@ obj = Solution()
 print(obj.countPairs([-1, 1, 2, 3, 1], 2))                  # 3
 print(obj.countPairs([-6, 2, 5, -2, -7, -1, 3], -2))        # 10
 
-# T.C: O(N log N)
+# T.C: O(N LOG N)
 # S.C: O(1)
 
 
