@@ -1,3 +1,95 @@
+# Approach 1: Single Pass
+from typing import List
+
+class Solution:
+    # def moveZeroes(self, nums: List[int]) -> None:
+    def moveZeroes(self, nums: List[int]) -> List[int]:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+
+        # Pointer for keep track of non-zero number's index
+        slow = 0
+
+        # Pointer for iteration
+        for fast in range(n):
+
+            # If zero found, increment fast by 1
+            if nums[fast] == 0:
+                fast += 1
+            
+            else:
+                # Tackling un-necessary swapping
+                if slow != fast:
+
+                    # Swap the zero with non-zero number
+                    nums[slow], nums[fast] = nums[fast], nums[slow]
+
+                # Incrementing slow for next element 
+                slow += 1
+
+        return nums
+
+        
+obj = Solution()
+print(obj.moveZeroes([0, 1, 0, 3, 12]))     # [1, 3, 12, 0, 0]
+print(obj.moveZeroes([0]))                  # [0]
+print(obj.moveZeroes([1, 0]))               # [1, 0]
+
+# T.C:  O(N)
+# S.C:  O(1)
+
+
+# -------------------------------------------------------------------
+
+
+# Approach 2: 2 Passes
+'''
+from typing import List
+
+class Solution:
+    # def moveZeroes(self, nums: List[int]) -> None:
+    def moveZeroes(self, nums: List[int]) -> List[int]:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+
+        # Pointer for updating non-zero numbers
+        write_index = 0
+
+        
+        for read_index in range(n):
+            # If non-zero found, swap & increment write_index by 1
+            if nums[read_index] != 0:
+                nums[write_index] = nums[read_index]
+                write_index += 1
+
+                
+        # Updating all remaining indices to 0
+        for i in range(write_index, n):
+            nums[i] = 0
+            
+
+        return nums
+
+        
+obj = Solution()
+print(obj.moveZeroes([0, 1, 0, 3, 12]))     # [1, 3, 12, 0, 0]
+print(obj.moveZeroes([0]))                  # [0]
+print(obj.moveZeroes([1, 0]))               # [1, 0]
+
+# T.C:  O(N)
+# S.C:  O(1)
+'''
+
+
+# -------------------------------------------------------------------
+
+
+# Approach 3 (Brute Force): Creating a new list
+'''
 from typing import List
 
 class Solution:
@@ -46,50 +138,5 @@ print(obj.moveZeroes([0, 1, 0, 3, 12]))     # [1, 3, 12, 0, 0]
 print(obj.moveZeroes([0]))                  # [0]
 
 # T.C: O(start)
-# S.C: O(1)
-
-
-# Not a proper solution
-'''
-from typing import List
-
-class Solution:
-    # def moveZeroes(self, nums: List[int]) -> None:
-    def moveZeroes(self, nums: List[int]) -> List[int]:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        n = len(nums)
-
-        # Pointer for iteration
-        left = 0
-
-        # Pointer for keep track of non-zero numbers
-        right = 0
-
-        # Condition for iterating through array 
-        while left < n:
-
-            # If zero, only incremented by 1
-            if nums[left] == 0:
-                left += 1
-            
-            else:
-
-                # Swap the zero with non-zero number
-                nums[left], nums[right] = nums[right], nums[left]
-
-                # Incrementing both pointers 
-                left += 1
-                right += 1
-
-        return nums
-
-        
-obj = Solution()
-print(obj.moveZeroes([0, 1, 0, 3, 12]))     # [1, 3, 12, 0, 0]
-print(obj.moveZeroes([0]))                  # [0]
-
-# T.C:     O(N)
-# S.C:     O(1)
+# S.C: O(N)
 '''
