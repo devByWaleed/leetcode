@@ -46,7 +46,7 @@ Explanation: The only possible triplet sums up to 0.
 
 `3 <= nums.length <= 3000`
 
-`-105 <= nums[i] <= 10^5`
+`-10^5 <= nums[i] <= 10^5`
 
 
 ### Topics:
@@ -56,8 +56,6 @@ Explanation: The only possible triplet sums up to 0.
 - Sorting
 
 ---
-
-### Hints:-
 
 #### Hint 1:-
 So, we essentially need to find three numbers x, y, and z such that they add up to the given value. If we fix one of the numbers say x, we are left with the two-sum problem at hand!
@@ -69,5 +67,3 @@ For the two-sum problem, if we fix one of the numbers, say x, we have to scan th
 
 #### Hint 3:-
 The second train of thought for two-sum is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?
-
----

@@ -1,4 +1,5 @@
-# Approach 1: Single Pass
+# Approach 3: Single Pass
+
 from typing import List
 
 class Solution:
@@ -61,7 +62,7 @@ class Solution:
 
         
         for read_index in range(n):
-            # If non-zero found, swap & increment write_index by 1
+            # If non-zero found, update & increment write_index by 1
             if nums[read_index] != 0:
                 nums[write_index] = nums[read_index]
                 write_index += 1
@@ -88,7 +89,7 @@ print(obj.moveZeroes([1, 0]))               # [1, 0]
 # -------------------------------------------------------------------
 
 
-# Approach 3 (Brute Force): Creating a new list
+# Approach 1 (Brute Force): Creating a new list
 '''
 from typing import List
 
@@ -103,32 +104,32 @@ class Solution:
         ans = [0] * n
 
         # Pointer for iteration
-        start = 0
+        i = 0
 
         # Pointer for ans array (non-zero)
-        i = 0
+        start = 0
 
         # Pointer for 0
         end = n - 1
 
-        while start < n:
+        while i < n:
 
-            if nums[start] == 0:
+            if nums[i] == 0:
 
                 # Assigning 0 to the end of array
-                ans[end] = nums[start]
+                ans[end] = nums[i]
 
                 # Decrementing for right place
                 end -= 1
             else:
 
                 # ans[i] for starting of ans array
-                ans[i] = nums[start]
+                ans[start] = nums[i]
 
                 # Incrementing for right place
-                i += 1
+                start += 1
             
-            start += 1
+            i += 1
 
         return ans
 
@@ -137,6 +138,6 @@ obj = Solution()
 print(obj.moveZeroes([0, 1, 0, 3, 12]))     # [1, 3, 12, 0, 0]
 print(obj.moveZeroes([0]))                  # [0]
 
-# T.C: O(start)
+# T.C: O(N)
 # S.C: O(N)
 '''
