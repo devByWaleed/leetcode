@@ -1,3 +1,60 @@
+
+from typing import List
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+
+        # Variables to keep track of max boundary
+        max_left, max_right = 0, 0
+        
+        trapped_water = 0       # calculating total water
+
+        # 2 pointers
+        left, right = 0, n - 1
+
+        # Condition
+        while left <= right:
+
+            # For left side
+            if max_left < max_right:
+                # If space is positive, add it
+                water = max_left - height[left]
+                if water > 0:
+                    trapped_water += water
+                
+                # Else update variable with current height
+                else:
+                    max_left = height[left]
+                left += 1
+            
+            # For right side
+            else:
+                # If space is positive, add it
+                water = max_right - height[right]
+                if water > 0:
+                    trapped_water += water
+                
+                # Else update variable with current height
+                else:
+                    max_right = height[right]
+                right -= 1
+        
+        return trapped_water
+
+
+obj = Solution()
+print(obj.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))   # 6     
+print(obj.trap([4, 2, 0, 3, 2, 5]))                     # 9
+
+# T.C: O(N)
+# S.C: O(1)
+
+
+
+
+
+'''
 from typing import List
 
 class Solution:
@@ -50,51 +107,4 @@ print(obj.trap([4, 2, 0, 3, 2, 5]))                     # 9
 
 # T.C: O(N)
 # S.C: O(1)
-
-
-
-
-
-
-'''
-from typing import List
-
-class Solution:
-    def trap(self, height: List[int]) -> int:
-        
-        n = len(height)
-
-        width = 1
-
-        trapped_water = 0
-
-        for i in range(n-1):
-
-            prev = i - 1
-            next = i + 1
-
-            if prev < 0 or next is None:
-                continue 
-
-            # For empty bar space
-            elif height[i] == 0:
-
-                if width == prev and width < next:
-                    trapped_water += 1
-
-            # previous & next values are equal
-            elif height[prev] == height[next]:
-
-                if height[i] < height[prev]:
-                    trapped_water += 1
-        
-
-        return trapped_water
-
-
-
-
-obj = Solution()
-print(obj.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))   # 6     
-print(obj.trap([4, 2, 0, 3, 2, 5]))                     # 9
 '''

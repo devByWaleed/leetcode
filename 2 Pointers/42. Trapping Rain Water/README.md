@@ -5,6 +5,8 @@ Given `n` non-negative integers representing an elevation map where the `width o
 
 ### Example 1:
 
+<img src="rain-trap.png" alt="Elevation Bar" />
+
 Input: `height = [0,1,0,2,1,0,1,3,2,1,2,1]`
 
 Output: `6`
