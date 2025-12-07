@@ -6,42 +6,32 @@ class Solution:
         # Edge case
         if n == 1:
             return True
-        
-
-        def isPalindrome(s, left, right):
-
-            while left <= right:
             
-                # Return False as per palindrome condition
-                if s[left] != s[right]:
+        # 2 pointers
+        l = 0
+        r = n - 1
+        
+        # Helper function to check for deletion
+        def is_palindrome(l, r):
+            while l < r:
+                if s[l] != s[r]:
                     return False
-                
-                # Moving the pointers
-                left += 1
-                right -= 1
+                l += 1
+                r -= 1
+            return True
         
-            return True     # After looping, return True for a palindrome
-
-
-
-        # 2 Pointers pointing at start and end of string
-        left = 0
-        right = n - 1
-
-        # Condition forr looping over the string of even & odd length
-        while left <= right:
+        
+        while l < r:
+            if s[l] != s[r]:
+                # Deletion from both side 
+                return is_palindrome(l+1, r) or is_palindrome(l, r-1)
             
-            # As per condition of removing at most 1 char, we declare helping function for checking
-            if s[left] != s[right]:
-
-                # We have 2 conditions, either the different char is on left side or right side
-                return isPalindrome(s, left+1, right) or isPalindrome(s, left, right-1)
-        
-            # Moving the pointers
-            left += 1
-            right -= 1
-
-        return True  # After looping, return True for a palindrome
+            # Moving both pointers
+            else:
+                l += 1
+                r -= 1
+                
+        return True
 
 
 obj = Solution()

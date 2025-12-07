@@ -3,29 +3,28 @@ from typing import List
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
 
-        # Initializing 2 pointers
+        # Initializing fast and slow pointers
         slow = nums[0]
         fast = nums[0]
-            
-        # Checking for cycle
+
+        # Pointer movement must be: P_{next} = P_{current}
+
+        # 1st, we find intersection of 2 numbers
         while True:
-                
             slow = nums[slow]
             fast = nums[nums[fast]]
-                
+
             if slow == fast:
                 break
-                
-        # Resetting 1 pointer
-        slow = nums[0]
-            
-            
+
+        # Reset 1 pointer to start and move 1 time
+        fast = nums[0]
         while slow != fast:
-                
             slow = nums[slow]
             fast = nums[fast]
-            
-        return fast    # Duplicate number
+
+
+        return slow     # Duplicate number will be on other pointer
     
 
 obj = Solution()
