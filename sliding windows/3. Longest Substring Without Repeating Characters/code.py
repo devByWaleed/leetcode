@@ -1,3 +1,48 @@
+# Using Hash-set
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        
+        n = len(s)
+
+        # Hash-set for record of repeated characters
+        hash_set = set()
+
+        # For shrinking window
+        left = 0
+
+        # Calculate maximum length
+        max_len = 0
+
+        for right in range(n):
+
+            # Remove left-most characters from window
+            while s[right] in hash_set:
+                hash_set.remove(s[left])
+                left += 1
+
+            # Adding element if not in set
+            hash_set.add(s[right])
+            
+            # Updating maximum size
+            max_len = max(max_len, right-left + 1)
+
+        return max_len 
+
+
+obj = Solution()
+print(obj.lengthOfLongestSubstring("abcabcbb"))     # 3
+print(obj.lengthOfLongestSubstring("bbbbb"))        # 1
+print(obj.lengthOfLongestSubstring("pwwkew"))       # 3
+print(obj.lengthOfLongestSubstring("aab"))          # 2
+print(obj.lengthOfLongestSubstring("dvdf"))         # 3
+
+# T.C: O(N)
+# S.C: O(1)
+
+
+
+# Using Ordered-Dictionary
+'''
 from collections import OrderedDict
 
 class Solution:
@@ -35,43 +80,4 @@ print(obj.lengthOfLongestSubstring("dvdf"))         # 3
 # T.C: O(N)
 # S.C: O(K)
 # K = size of the character set (at most number of unique characters in window)
-
-
-
-
-# Failed For Test-Cases
-'''
-class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        
-        max_length = 0   # save longest sub-string length
-        max_count = 0   # max frequency for single char in current window
-
-        frequencies = {}    # Track frequecies for each window
-
-        for left in range(len(s)):
-
-            if s[left] in frequencies:
-                max_count -= 1
-                if max_length < max_count:    max_length = max_count
-
-            else:
-                frequencies[s[left]] = frequencies.get(s[left], 0) + 1
-                max_count += 1
-                if max_length < max_count:    max_length = max_count
-            
-        
-        return max_length
-        # return frequencies, max_count, max_length
-
-
-obj = Solution()
-print(obj.lengthOfLongestSubstring("abcabcbb"))     # 3
-print(obj.lengthOfLongestSubstring("bbbbb"))        # 1
-print(obj.lengthOfLongestSubstring("pwwkew"))       # 3
-print(obj.lengthOfLongestSubstring("aab"))          # 2
-print(obj.lengthOfLongestSubstring("dvdf"))         # 3
-
-# T.C: O(N)
-# S.C: O(1)
 '''
