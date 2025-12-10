@@ -16,5 +16,5 @@ obj = Solution()
 print(obj.numJewelsInStones("aA", "aAAbbbb"))   # 3
 print(obj.numJewelsInStones("z", "ZZ"))         # 0
 
-# T.C: O(N)
+# T.C: O(M * N)
 # S.C: O(1)
