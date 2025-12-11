@@ -1,48 +1,38 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        
-        frequencies = {}    # Store frequencies of s1
+        k = len(s1)     # Winodw size
 
-        window_freq = {}    # Store frequencies of current window
+        # Edge case
+        if k > len(s2):    return False
+    
+        frequency = {}      # Frequency of string to be checked
+        freq_window = {}    # Frequenc of chars in current window
 
-        for i in s1:
-            
-            if i not in frequencies:
-                frequencies.update({i: 0})
-            
-            frequencies[i] += 1
+        # Storing frequency of s1
+        for i in range(k):
+            frequency[s1[i]] = frequency.get(s1[i], 0) + 1
 
+        # Storign frequency of first k element
+        for i in range(k):
+            freq_window[s2[i]] = freq_window.get(s2[i], 0) + 1
 
-        # Storing frequencies of 1st "s1.length" size window
-        window = s2[:len(s1)]
+        left = 0    # For shrinking window
 
-        for j in window:
-            
-            if j not in window_freq:
-                window_freq[j] = 0
-            
-            window_freq[j] += 1
+        # Looping through rest of string
+        for right in range(k, len(s2)):
 
-
-        # Looping over remaining string
-        for j in range(len(s1), len(s2)):
-            
-            # If permutation found, return true
-            if frequencies == window_freq:
+            # Checking for frequency count
+            if frequency == freq_window:
                 return True
-            # Else remove leftmost element
-            window_freq[s2[j-len(s1)]] -= 1
-
-            # Edge case for removal of character
-            if window_freq[s2[j-len(s1)]] == 0:
-                window_freq.pop(s2[j-len(s1)])
             
-            # Add current's frequency
-            window_freq[s2[j]] = window_freq.get(s2[j], 0) + 1
+            # Expanding and shrinking window
+            freq_window[s2[right]] = freq_window.get(s2[right], 0) + 1
+            if freq_window[s2[left]] > 1:   freq_window[s2[left]] -= 1
+            else:   del freq_window[s2[left]]
+            left += 1
 
 
-        # After whole loop, compare both hashmaps
-        return frequencies == window_freq
+        return frequency == freq_window    # For final check
 
 
 obj = Solution()
