@@ -4,24 +4,26 @@ class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         
         n = len(nums)
-        
-        # Empty hashset of size k
+
+        # Store window of size k
         window = set()
 
-        for i in range(n):
+        left = 0    # For shrinking window
 
-            # Checking for duplicates (1st condition)
-            if nums[i] in window:
+        for right in range(n):
+            # If number found in window, satisfied both conditions
+            if nums[right] in window:
                 return True
+        
+            # Update the window with current element
+            window.add(nums[right])
+        
+            # Checks window length with k and remove left-most element
+            if right-left == k:
+                window.remove(nums[left])
+                left += 1
             
-            # add if not present
-            window.add(nums[i])
 
-            # Keeping the window of size k by removing old element, enforce 2nd condition
-            if i >= k:
-                window.discard(nums[i-k])
-
-        # If after iterating all over array, return False
         return False
 
 
@@ -35,24 +37,36 @@ print(obj.containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2))     # False
 
 
 
-# Nested loop (brute force thinking)
-'''from typing import List
+# Using Hash-map (track last seen index)
+'''
+from typing import List
 
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
-        
-        for i in range(len(nums)):
+        n = len(nums)
 
-            for j in range(len(nums)):
+        # Store last seen index of number
+        last_index = {}
 
-                if i == j:  continue
+        for i in range(n):
+            # If number found
+            if nums[i] in last_index:
 
-                if nums[i] == nums[j] and abs(i - j) <= k:
+                # Check for 2nd condition
+                if (abs(i-last_index[nums[i]]) <= k):
                     return True
         
+            # Update the last seen index
+            last_index.update({nums[i]: i})
+
         return False
+
 
 obj = Solution()
 print(obj.containsNearbyDuplicate([1, 2, 3, 1], 3))           # True
 print(obj.containsNearbyDuplicate([1, 0, 1, 1], 1))           # True
-print(obj.containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2))     # False'''
+print(obj.containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2))     # False
+
+# T.C: O(N)
+# S.C: O(N)
+'''
