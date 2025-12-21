@@ -13,6 +13,9 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
+        # Edge case
+        if not head or not head.next:
+            return False
         
         # Initialize 2 pointers at head
         slow, fast = head, head

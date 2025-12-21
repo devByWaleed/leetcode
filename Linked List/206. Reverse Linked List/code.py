@@ -13,45 +13,40 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-
         # Edge case
-        if not head:
+        if not head or not head.next:
             return head
         
+        # Initializing 3 pointers
+        curr = head
+        prev, next_node = None, None
 
-        # Pointer for holding reverse list
-        temp = None
+        # Safe condition for traversing
+        while curr is not None:
 
-        # Store the next node for not losing reference
-        next_node = head.next
-    
-        # Traversing from head
-        while head:
+            # Store next node, for tracking rest of list
+            next_node = curr.next
 
-            # Reversing current node's pointer
-            head.next = temp
+            # Reverse the link
+            curr.next = prev
+            
+            # Move prev, points to current node
+            prev = curr
+            
+            # Move curr to continue loop
+            curr = next_node
 
-            # Assigning current element to reversed list
-            temp = head
-
-            # Advance the head to the next node in the original list
-            head = next_node
-
-            # Update next node if exists (for traversing)
-            if next_node:
-                next_node = next_node.next
-
+        
         # For printing whole Linked-List
         '''
-        while temp:
-            print(temp, end=" -> ")
-            temp = temp.next
+        while prev:
+            print(prev, end=" -> ")
+            prev = prev.next
         '''
-        
-        # Returning the reversed linked list
-        return temp
 
+        return prev
         
+
 obj = Solution()
 
 # Create linked list:
