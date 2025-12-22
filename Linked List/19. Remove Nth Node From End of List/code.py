@@ -13,33 +13,31 @@ class ListNode:
 
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        
-        # Edge case
-        if not head.next and n == 1:    return None
-
-        # Dummy node for easy
+        # Creating dummy node and set it before the head
         dummy = ListNode(0)
         dummy.next = head
 
-        slow, fast = dummy, dummy
+        # Both pointers at dummy
+        slow = dummy
+        fast = dummy
 
-        # Move fast pointer n steps ahead (so slow ends up before node to delete)
-        for _ in range(n + 1):
+        # Moving fast n steps ahead
+        for _ in range(n):
             fast = fast.next
 
-        # Move both pointers until fast reaches end
-        while fast:
+        # Looping through the end
+        while fast.next is not None:
             slow = slow.next
             fast = fast.next
 
-        # Delete the target node
+        # Removing the node
         slow.next = slow.next.next
 
 
         # For printing whole Linked-List
         '''
-        while dummy.next:
-            print(dummy.next, end=" -> ")
+        while dummy:
+            print(dummy, end=" -> ")
             dummy = dummy.next
         '''
 

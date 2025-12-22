@@ -12,59 +12,57 @@ class ListNode:
 
 
 class Solution:
+    # def reorderList(self, head: Optional[ListNode]) -> Optional[ListNode]:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        # Finding mid
+        
+        # Initialize two pointers to find the middle of the linked list
         slow, fast = head, head
 
+        # Move slow by 1 step and fast by 2 steps to locate the middle
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
 
-        # Reverse 2nd half
-        pre, temp = None, None
-        
-        curr = slow     # We need to reverse 2nd half part
+        # Start reversing the second half of the list
+        curr = slow.next        # Head of second half
+        slow.next = None        # Split the list into two halves
+        prev = None             # Will become new head of reversed half
 
+        # Reverse the second half using three-pointer technique
         while curr:
-            temp = curr.next    # temp points to next element
 
-            curr.next = pre     # pre value set to next pointer of current
-
-            pre = curr          # pre set to current value
-
-            curr = temp         # current pointer set to temp(next element)
-
-        # Saving both sides
-        first, second = head, pre
-
-        # Condition for all nodes in the list
-        while second and second.next:
-
-            # Saving next pointers
-            temp1 = first.next
-            temp2 = second.next
-
-            # Alternating the nodes
-            first.next = second
-            second.next = temp1
-
-            # Save next pointers for alternating
-            first = temp1
-            second = temp2
+            next_node = curr.next   # Store next node
+            curr.next = prev        # Reverse current node's pointer
+            prev = curr             # Move prev forward
+            curr = next_node        # Move curr forward
 
 
+        # Merge the first half and the reversed second half alternately
+        first, second = head, prev
+
+        while second:
+
+            temp1 = first.next      # Store next node of first half
+            temp2 = second.next     # Store next node of second half
+
+            first.next = second     # Link first node to second
+            second.next = temp1     # Link second node back to first half
+
+            first = temp1           # Move first pointer forward
+            second = temp2          # Move second pointer forward
+
+        
         # For printing whole Linked-List
         '''
         while head:
-            print(head.val, end=" -> ")
+            print(head, end=" -> ")
             head = head.next
         '''
 
+        # return head
 
+        
 obj = Solution()
 
 head = ListNode(1)
