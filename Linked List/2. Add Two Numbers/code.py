@@ -13,37 +13,54 @@ class ListNode:
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        
-        dummy = ListNode(0)
 
-        curr = dummy
+        dummy = ListNode(0)     # Dummy node for new merged list
+        curr = dummy        # For traversing in dummy
 
-        carry = 0       # Carry if sum is >= 10
+        carry = 0       # For storing carry for sum >= 10
 
+        # Loop until we have values / carry
         while l1 or l2 or carry:
-            
-            # Step 1.1: Read values from l1 and l2 (0 if list exhausted)
+
+            # If no value, add 0 as edge case
             val1 = l1.val if l1 else 0
             val2 = l2.val if l2 else 0
 
-            # Step 1.2: Sum the two digits + carry
             total = val1 + val2 + carry
 
-            # Step 1.3: Determine new digit and new carry
+            # Extract carry & digit despite the sum
             carry = total // 10
-            new_digit = total % 10
-            
-            # Adding new node with sum value
-            curr.next = ListNode(new_digit)
+            digit = total % 10
 
-            # Traversing the lists 
+            # Add to dummy and mov curr
+            curr.next = ListNode(digit)
             curr = curr.next
 
+            # Also works
+            '''
+            # If sum >= 10, extract digit and add to dummy
+            if total >= 10:
+                carry = total // 10
+                digit = total % 10
+
+                curr.next = ListNode(digit)
+                curr = curr.next
+            
+            # Else add whole total and reset carry
+            else:
+                curr.next = ListNode(total)
+                curr = curr.next
+                carry = 0
+            '''
+            
+
+            # Update the head if has values
             if l1:
                 l1 = l1.next
             if l2:
                 l2 = l2.next
 
+        
         # For printing whole Linked-List
         '''
         while dummy.next:
@@ -51,8 +68,8 @@ class Solution:
             dummy = dummy.next
         '''
 
-        return dummy.next
-
+        return dummy.next   # return new head
+    
 
 obj = Solution()
 

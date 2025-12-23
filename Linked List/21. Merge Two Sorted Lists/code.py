@@ -14,68 +14,77 @@ class ListNode:
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         
-        # Creating dummy node for easy merging
-        dummy = ListNode(0)
-        # dummy.next = list1        # No need as we need a new sorted list
+        dummy = ListNode(0)     # Dummy node for new merged list
+        curr = dummy        # For traversing in dummy
 
-        # Current pointer for traversal
-        curr = dummy
-
-        # Condition for both list traversal
+        # Loop until 1 list finished
         while list1 and list2:
-            
-            # Comparing and then assigning list1 node
-            if list1.val < list2.val:
-                curr.next = list1
-                list1 = list1.next
-                curr = curr.next
 
-            # Comparing and then assigning list2 node
+            # For less & equal values, add list1
+            if list1.val <= list2.val:
+                curr.next = list1
+                curr = curr.next
+                list1 = list1.next
+
+            # For list2 values
             else:
                 curr.next = list2
-                list2 = list2.next
                 curr = curr.next
+                list2 = list2.next
 
-        curr.next = list1 or list2      # If any list becomes empty, assign other list
+        # After loop, add non-empty list. Similar to the loops below
+        curr.next = list1 or list2
+
+        '''
+        while list1:
+            curr.next = list1
+            curr = curr.next
+            list1 = list1.next
+        
+        while list2:
+            curr.next = list2
+            curr = curr.next
+            list2 = list2.next
+        '''
 
 
         # For printing whole Linked-List
         '''
-        while dummy.next:
-            print(dummy.next, end=" -> ")
+        while dummy:
+            print(dummy, end=" -> ")
             dummy = dummy.next
         '''
 
-        return dummy.next
+        return dummy.next   # return new head
 
 
 obj = Solution()
 
 # Create linked list:
-head1 = ListNode(1)
-head1.next = ListNode(2)
-head1.next.next = ListNode(4)
+list1 = ListNode(1)
+list1.next = ListNode(2)
+list1.next.next = ListNode(4)
 
-head2 = ListNode(1)
-head2.next = ListNode(3)
-head2.next.next = ListNode(4)
+list2 = ListNode(1)
+list2.next = ListNode(3)
+list2.next.next = ListNode(4)
 
-print(obj.mergeTwoLists(head1, head2))      # 1 -> 1 -> 2 -> 3 -> 4 -> 4
-
-
-# Create linked list:
-head1 = None
-
-head2 = None
-print(obj.mergeTwoLists(head1, head2))      # None
+print(obj.mergeTwoLists(list1, list2))      # 1 -> 1 -> 2 -> 3 -> 4 -> 4
 
 
 # Create linked list:
-head1 = None
+list1 = None
 
-head2 = ListNode(0)
-head2.next = None
-print(obj.mergeTwoLists(head1, head2))      # 0
+list2 = None
+print(obj.mergeTwoLists(list1, list2))      # None
+
+
+# Create linked list:
+list1 = None
+
+list2 = ListNode(0)
+list2.next = None
+print(obj.mergeTwoLists(list1, list2))      # 0
 
 # T.C: O(N + M)
 # S.C: O(1)
