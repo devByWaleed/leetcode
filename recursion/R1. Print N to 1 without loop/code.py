@@ -13,3 +13,6 @@ class Solution:
 
 obj = Solution()
 obj.printNos(10)     # 10 9 8 7 6 5 4 3 2 1
+
+# T.C: O(N)
+# S.C: O(N)
