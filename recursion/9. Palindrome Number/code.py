@@ -23,13 +23,16 @@ class Solution:
 
         # Compare original and reversed one
         return x == reverse(x)
-
+    
 
 obj = Solution()
-print(obj.isPalindrome(121))       # True
-print(obj.isPalindrome(123))       # False
-print(obj.isPalindrome(0))         # True
-print(obj.isPalindrome(7))         # True
+print(obj.isPalindrome(121))    # True
+print(obj.isPalindrome(-121))   # False
+print(obj.isPalindrome(10))     # False
+print(obj.isPalindrome(121))    # True
+print(obj.isPalindrome(123))    # False
+print(obj.isPalindrome(0))      # True
+print(obj.isPalindrome(7))      # True
 
 # T.C: O(LOG(N))
 # S.C: O(LOG(N))
