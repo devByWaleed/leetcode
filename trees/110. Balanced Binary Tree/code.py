@@ -14,7 +14,42 @@ class TreeNode:
 
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        pass
+        # Edge case
+        if root == None:
+            return True
+        
+        '''
+        Used list bcz it will change the value
+        rather than creating a new variable inside recursive function
+        '''
+        balanced = [True]
+
+        def height(root):
+            # Base case
+            if root == None:
+                return 0
+            
+            # Calculating height of left child
+            left_height = height(root.left)
+            
+            # Indicate imbalance in left sub-tree
+            if balanced[0] == False:
+                return 0
+            
+            # Calculating height of right child
+            right_height = height(root.right)
+
+            # Calculating difference
+            if abs(left_height - right_height) > 1:
+                balanced[0] = False
+
+            # 1 is height of current node
+            return 1 + max(left_height, right_height)
+
+
+        # Call helper function
+        height(root)
+        return balanced[0]
 
 
 obj = Solution()
@@ -45,3 +80,6 @@ print(obj.isBalanced(root))     # False
 # Test Case
 root = None
 print(obj.isBalanced(root))     # True
+
+# T.C: O(N)
+# S.C: O(H)  H = height of tree

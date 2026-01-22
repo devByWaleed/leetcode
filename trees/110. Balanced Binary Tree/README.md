@@ -2,8 +2,6 @@
 
 Given the root of a binary tree, determine if it is **height-balanced**.
 
-A binary tree is height-balanced if the **depth of the two subtrees of every node never differs by more than 1**.
-
 **Height-Balanced**
 
 > A height-balanced binary tree is a binary tree in which the depth of the two subtrees of every node never differs by more than one.

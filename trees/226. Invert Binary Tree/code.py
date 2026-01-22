@@ -1,4 +1,5 @@
 from typing import Optional
+from collections import deque
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -14,8 +15,50 @@ class TreeNode:
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        pass
+        # Base cases
+        if root == None:
+            return None
+        if not root.left and not root.right:
+            return root
+        
+        # Inverting child nodes
+        root.left, root.right = root.right, root.left
 
+        # Inverting sub-childs with recursion
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+
+        # Printing Tree in BFS form
+        '''
+        print(breathFirstSearch(root))
+        '''
+        return root
+
+
+'''
+def breathFirstSearch(root):
+  # Edge case
+  if root == None:
+     return []
+  
+  queue = [root]
+
+  queue = deque(queue)
+  result = []
+
+  while queue:
+    curr = queue.popleft()
+    result.append(curr.val)
+    
+    if curr.left:
+      queue.append(curr.left)
+
+    if curr.right:
+      queue.append(curr.right)
+
+
+  return result
+'''
 
 obj = Solution()
 
@@ -41,4 +84,7 @@ print(obj.invertTree(root))     # 2
 
 # Test Case
 root = None
-print(obj.invertTree(root))     # []
+print(obj.invertTree(root))     # None
+
+# T.C: O(N)
+# S.C: O(H)  H = height of tree
