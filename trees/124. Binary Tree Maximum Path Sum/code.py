@@ -14,7 +14,36 @@ class TreeNode:
 
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        pass
+        '''
+        Used list bcz it will change the value
+        rather than creating a new variable inside recursive function
+        ''' 
+        max_sum = [root.val]
+
+        def dfs(root):
+            # Base case
+            if not root:
+                return 0
+            
+            # Handling left & right childs
+            max_left = dfs(root.left)
+            max_right = dfs(root.right)
+
+            # Handling -ve values
+            max_left = max(max_left, 0)
+            max_right = max(max_right, 0)
+
+            # Calculate max path sum with SPLIT
+            max_sum[0] = max(max_sum[0], root.val + max_left + max_right)
+
+            # Returning sum of valid path by picking either left or right
+            return root.val + max(max_left, max_right)
+        
+        
+        # Calling function for calculation
+        dfs(root)
+
+        return max_sum[0]       # Returning max sum
 
 
 obj = Solution()
@@ -37,3 +66,6 @@ root.right = TreeNode(20)
 root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
 print(obj.maxPathSum(root))    # 42
+
+# T.C: O(N)
+# S.C: O(H)
