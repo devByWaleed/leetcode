@@ -1,40 +1,42 @@
 class MinStack:
 
     def __init__(self):
-        self.st = []
-        self.min_value = []
-        self.n = len(self.st)
-        self.m = len(self.min_value)
-        
+        self.stack = []
+        self.min_stack = []
+
 
     def push(self, val: int) -> None:
-        self.st.append(val)
+        # Adding element into stack
+        self.stack.append(val)
         
-        # Adding value to 2nd stack
-        if not self.min_value or val <= self.min_value[self.m-1]:
-            self.min_value.append(val)
+        # For 1st element
+        if not self.min_stack:
+            self.min_stack.append(val)
         
+        # Compare & push
+        else:
+            min_num = min(self.min_stack[-1], val)
+            self.min_stack.append(min_num)
+
 
     def pop(self) -> None:
-        # If equal, pop from both, else pop from main stack
-        if self.st[self.n-1] == self.min_value[self.m-1]:
-            self.st.pop()
-            self.min_value.pop()
-        else:
-            self.st.pop()
-        
+        # Removing element from both stacks
+        if self.stack:
+            self.stack.pop()
+        if self.min_stack:
+            self.min_stack.pop()
 
+        
     def top(self) -> int:
-        # Top element of main stack
-        if self.st:
-            return self.st[self.n-1]
+        # Get top element from stack
+        if self.stack:
+            return self.stack[len(self.stack) - 1]
         
 
     def getMin(self) -> int:
-        # Top element of 2nd stack
-        if self.min_value:
-            return self.min_value[self.m-1]
-        
+        # Top element from min_stack is minimum
+        return self.min_stack[-1]
+      
 
 # Your MinStack object will be instantiated and called as such:
 obj = MinStack()
