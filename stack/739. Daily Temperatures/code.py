@@ -18,7 +18,7 @@ class Solution:
             # Adding current value in stack
             stk.append((value, index))
 
-        return answer 
+        return answer
         
 
 obj = Solution()
@@ -33,7 +33,7 @@ print(obj.dailyTemperatures([30, 60, 90]))                      # [1,1,0]
 
 # Nested solution
 '''
-from typing import Listk
+from typing import List
 
 class Solution:
     def dailyTemperatures(self, temperatures: Listk[int]) -> Listk[int]:
