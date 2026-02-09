@@ -3,34 +3,36 @@ from collections import deque
 
 class Solution:
     def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
-        
-        n = len(students)
-        queue = deque(students)     # Using deque for efficient removal
-        stack = deque(sandwiches)
+        # circular = 0
+        # square = 1
+        # students = queue
+        # sandwiches = stack
         take = 0            # Track of student able to eat
         infinite = 0        # To check for infinite loop
-
-        while queue:
-
-            # If student take sandwich
-            if queue[0] == stack[0]:
-                queue.popleft()
-                stack.popleft()
-                take += 1
-                infinite = 0    # Re-setting for smooth record
+        
+        queue = deque(students)     # Using deque for efficient removal
+        stack = deque(sandwiches)
+        
+        while queue and stack:
+          
+          # If student take sandwich
+          if queue[0] == stack[0]:
+            queue.popleft()
+            stack.popleft()
+            take += 1
+            infinite = 0    # Re-setting for smooth record
             
-            # Student will go to end of line
-            else:
-                current = queue.popleft()
-                queue.append(current)
-                infinite += 1
-
-                # Check for infinite loop
-                if infinite == len(queue):  break
-
+          # Student will go to end of line
+          else:
+            front = queue.popleft()
+            queue.append(front)
+            infinite += 1
+            
+            # For same result again and again
+            if infinite == len(queue):  break
+          
         # Calculating the students who are unable to eat
-        unable = n - take
-        return unable
+        return len(students) - take
 
 
 obj = Solution()
