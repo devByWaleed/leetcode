@@ -3,14 +3,14 @@ from typing import List
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
       # Pointers for binary search
-      start = 0
-      end = len(nums) - 1
+      left = 0
+      right = len(nums) - 1
       
       # Runs for last possible element
-      while start < end:
+      while left < right:
         # Calculate mid
-        ''' mid = (start + end) // 2 '''
-        mid = start + (end - start) // 2
+        ''' mid = (left + right) // 2 '''
+        mid = left + (right - left) // 2
         
         # If found, return the index
         if target == nums[mid]:
@@ -18,11 +18,11 @@ class Solution:
         
         # If greater, search on right side
         elif target > nums[mid]:
-          start = mid + 1
+          left = mid + 1
         
         # If smaller, search on left side
         else:
-          end = mid - 1
+          right = mid - 1
       
       # If not found, return -1
       return -1
