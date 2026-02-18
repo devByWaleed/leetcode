@@ -36,3 +36,46 @@ print(obj.subsets([0]))                 # [[], [0]]
 
 # T.C: O(N * 2^N)
 # S.C: O(N)
+
+
+
+# Answer in reversed form
+'''
+from typing import List
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+
+        # Store all subsets
+        result = []
+
+        # Current subset
+        per = []
+
+        def backtrack(i):
+            # If we get all combinations
+            if i == n:
+                result.append(per.copy())
+                return
+            
+            # Don't pick nums[i]
+            # backtrack(i+1)
+
+            # Pick nums[i]
+            per.append(nums[i])
+            backtrack(i+1)
+            per.pop()
+            backtrack(i+1)
+
+        # Call bactrack function for 1st element
+        backtrack(0)
+
+        return result
+
+
+obj = Solution()
+print(obj.permute([1, 2, 3]))           # [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
+print(obj.permute([0, 1]))              # [[0,1], [1,0]]
+print(obj.permute([1]))                 # [[1]]
+'''
