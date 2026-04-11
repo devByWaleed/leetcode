@@ -1,21 +1,19 @@
+# Tabulation
 class Solution:
     def climbStairs(self, n: int) -> int:
-        # Base case
-        if n <= 2:
-            return n
-        
-        # Initialize dp table
+        # DP table, (n+1)th position holds answer
         dp = [0] * (n + 1)
-
-        # Initialize initial cases
+        
+        # Set default values
         dp[1] = 1
         dp[2] = 2
-
-        # Looping & storing previous number
+        
+        # Looping till n
         for i in range(3, n+1):
+            # Running sum calculation
             dp[i] = dp[i-1] + dp[i-2]
 
-        # Return answer for nth number (given)
+        # Return answer
         return dp[n]
 
 
@@ -23,42 +21,111 @@ obj = Solution()
 print(obj.climbStairs(2))       # 2
 print(obj.climbStairs(3))       # 3
 
-
 # T.C: O(N)
 # S.C: O(N)
 
 
 
-
-
-
-
+# Memoization
 '''
 class Solution:
     def climbStairs(self, n: int) -> int:
-        # Size n+1 to include "0 -> n"
-        memo = [-1] * (n + 1)
+        # Memo table
+        memo = {}
         
-        def solve(memo, n):
-            # Base case
-            if n <= 1:
-                return n
-    
-            # If already have final answer, return
-            if memo[n] != -1:
-                return memo[n]
+        def solve(k):
+            # Lookup in memo for quick result
+            if k in memo:
+                return memo[k]
             
-            # Calculating fibonacci number
-            memo[n] = solve(memo, n-1) + solve(memo, n-2)
+            # Base case
+            if k <= 2:
+                return k
+            
+            # For 1 step
+            way1 = solve(k-1)
+            
+            # For 2 steps
+            way2 = solve(k-2)
+            
+            # Recursive calculation
+            memo[k] = way1 + way2
 
-            # Returning answer
-            return memo[n]
-
-        # Final return
-        return solve(memo, n)
+            return memo[k]
+        
+        # Return the answer
+        return solve(n)
 
 
 obj = Solution()
 print(obj.climbStairs(2))       # 2
 print(obj.climbStairs(3))       # 3
+
+# T.C: O(N)
+# S.C: O(N)
+'''
+
+
+
+# Recursion
+'''
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # Base case
+        if n <= 2:
+            return n
+        
+        # For 1 step
+        way1 = self.climbStairs(n-1)
+        
+        # For 2 steps
+        way2 = self.climbStairs(n-2)
+        
+        # Recursive calculation
+        return way1 + way2
+
+
+obj = Solution()
+print(obj.climbStairs(2))       # 2
+print(obj.climbStairs(3))       # 3
+
+# T.C: O(2 ^ N)
+# S.C: O(N)
+'''
+
+
+
+# 2 Vars
+'''
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # Edge case
+        if n <= 2:
+            return n
+        
+        # 2 vars
+        var1 = 1
+        var2 = 2
+
+        # Looping till n
+        for _ in range(3, n+1):
+            # cS(i) = cS(i-1) + cS(i-2)
+            temp = var1 + var2
+            
+            # Move var1 to next position
+            var1 = var2
+            
+            # Move var2 to next position
+            var2 = temp
+
+        # Return answer
+        return var2
+
+
+obj = Solution()
+print(obj.climbStairs(2))       # 2
+print(obj.climbStairs(3))       # 3
+
+# T.C: O(N)
+# S.C: O(1)
 '''
