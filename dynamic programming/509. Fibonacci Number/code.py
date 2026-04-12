@@ -1,19 +1,17 @@
-# Tabulation
+# Recursion
+'''
 class Solution:
     def fib(self, n: int) -> int:
-        # DP table, (n+1)th position holds answer
-        dp = [0] * (n + 1)
+        # Base case
+        if n == 0 or n == 1:
+            return n
         
-        # Set default values
-        dp[1] = 1
-        
-        # Looping till n
-        for i in range(2, n+1):
-            # Running sum calculation
-            dp[i] = dp[i-1] + dp[i-2]
+        # Last 2 numbers
+        num1 = self.fib(n-1)
+        num2 = self.fib(n-2)
 
-        # Return answer
-        return dp[n]
+        # Recursive calculation
+        return num1 + num2
 
 
 obj = Solution()
@@ -21,8 +19,9 @@ print(obj.fib(2))       # 1
 print(obj.fib(3))       # 2
 print(obj.fib(4))       # 3
 
-# T.C: O(N)
+# T.C: O(2 ^ N)
 # S.C: O(N)
+'''
 
 
 
@@ -66,20 +65,22 @@ print(obj.fib(4))       # 3
 
 
 
-# Recursion
-'''
+# Tabulation
 class Solution:
     def fib(self, n: int) -> int:
-        # Base case
-        if n == 0 or n == 1:
-            return n
+        # DP table, (n+1)th position holds answer
+        dp = [0] * (n + 1)
         
-        # Last 2 numbers
-        num1 = self.fib(n-1)
-        num2 = self.fib(n-2)
+        # Set default values
+        dp[1] = 1
+        
+        # Looping till n
+        for i in range(2, n+1):
+            # Running sum calculation
+            dp[i] = dp[i-1] + dp[i-2]
 
-        # Recursive calculation
-        return num1 + num2
+        # Return answer
+        return dp[n]
 
 
 obj = Solution()
@@ -87,9 +88,8 @@ print(obj.fib(2))       # 1
 print(obj.fib(3))       # 2
 print(obj.fib(4))       # 3
 
-# T.C: O(2 ^ N)
+# T.C: O(N)
 # S.C: O(N)
-'''
 
 
 
