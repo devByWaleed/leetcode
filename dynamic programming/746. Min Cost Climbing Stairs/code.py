@@ -169,5 +169,5 @@ print(obj.minCostClimbingStairs([10, 15, 20]))                                  
 print(obj.minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]))          # 6
 
 # T.C: O(N)
-# S.C: O(N)
+# S.C: O(1)
 '''
