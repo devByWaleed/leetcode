@@ -1,0 +1,60 @@
+# 684. Redundant Connection
+
+In this problem, a tree is an undirected graph that is connected and has no cycles.
+
+You are given a graph that started as a tree with `n` nodes labeled from `1` to `n`, with one additional edge added. The added edge has two different vertices chosen from `1` to `n`, and was not an edge that already existed.
+
+The graph is represented as an array `edges` of length `n` where `edges[i] = [ai, bi]` indicates that there is an edge between nodes `ai` and `bi` in the graph.
+
+Return an edge that can be removed so that the resulting graph is a tree of `n` nodes. If there are multiple answers, return the answer that **occurs last** in the input.
+
+
+### Example 1:
+
+<img src="connection1.PNG" alt="Connection 1" />
+
+Input: `edges = [[1,2],[1,3],[2,3]]`
+
+Output: `[2,3]`
+
+
+### Example 2:
+
+<img src="connection2.PNG" alt="Connection 2" />
+
+Input: `edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]`
+
+Output: `[1,4]`
+
+
+### Constraints:
+- `n == edges.length`
+- `3 <= n <= 1000`
+- `edges[i].length == 2`
+- `1 <= ai < bi <= edges.length`
+- `ai != bi`
+- There are no repeated edges.
+- The given graph is connected.
+
+
+### Topics
+- Depth-First Search
+- Breadth-First Search
+- Union Find
+- Graph
+
+---
+
+`parent` array of size `n + 1` where `parent[i] = i` (each node is its own parent initially)  
+`rank` array of size `n + 1` initialized to `0`  
+
+- Define `find(node)`:  
+    - If `parent[node] != node`, recursively set `parent[node] = find(parent[node])` (path compression)  
+    - Return `parent[node]`  
+- Define `union(a, b)` → returns `False` if they are already connected (cycle detected):  
+    - Find roots: `root_a = find(a)`, `root_b = find(b)`  
+    - If `root_a == root_b`, return `False` (redundant edge found)  
+    - Union by rank: attach the smaller rank tree under the larger rank tree  
+    - Return `True`  
+- Loop through each edge `[a, b]` in `edges`:  
+    - If `union(a, b)` returns `False`, return `[a, b]` (this is the redundant edge)
