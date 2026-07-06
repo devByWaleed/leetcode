@@ -81,3 +81,6 @@ True
 None
 True
 """
+
+# T.C: O(26 ⋅ L ⋅ N) , Looping through word and working for 26-size for each char
+# S.C: insert() → O(26 ⋅ L) , search / startsWith  → O(1)
