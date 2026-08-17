@@ -3,39 +3,40 @@ from typing import List
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-
-        # Store all subsets
+        
+        # Stores final answer
         result = []
-
-        # Current subset
-        sub_set = []
-
+        
+        # Stores single pairs
+        sub_sets = []
+        
         def backtrack(i):
-            # If we get all combinations
+            # Base case to add into result
             if i == n:
-                result.append(sub_set.copy())
+                result.append(sub_sets.copy())
                 return
             
-            # Don't pick nums[i]
+            # Backtrack: Don't pick nums[i]
             backtrack(i+1)
 
-            # Pick nums[i]
-            sub_set.append(nums[i])
+            # Backtrack: Pick nums[i]
+            sub_sets.append(nums[i])
             backtrack(i+1)
-            sub_set.pop()
-
-        # Call bactrack function for 1st element
+            
+            # POP ( UNDO )
+            sub_sets.pop()
+        
+        # Call function with initial value
         backtrack(0)
-
         return result
 
 
 obj = Solution()
-print(obj.subsets([1, 2, 3]))           # [[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]
-print(obj.subsets([0]))                 # [[], [0]]
+print(obj.sub_sets([1, 2, 3]))           # [[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]
+print(obj.sub_sets([0]))                 # [[], [0]]
 
-# T.C: O(N * 2^N)
-# S.C: O(N)
+# T.C: O(N * 2^N) --> 2^N sub_sets for N numbers
+# S.C: O(N)       --> Recursive call stack used
 
 
 
@@ -47,7 +48,7 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
 
-        # Store all subsets
+        # Store all sub_sets
         result = []
 
         # Current subset

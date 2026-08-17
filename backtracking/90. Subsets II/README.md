@@ -29,3 +29,10 @@ Output `[[],[0]]`
 - Array
 - Backtracking
 - Bit Manipulation
+
+
+'''
+1 --> 2 --> 2 : add [] to result
+Backtrack 1: add [2] to result
+
+'''
