@@ -43,4 +43,25 @@ print(obj.letterCombinations("23"))     # ["ad", "ae", "af", "bd", "be", "bf", "
 print(obj.letterCombinations("2"))      # ["a","b","c"]
 
 # T.C: O(4^N) --> Max mapping + Looking for each combination + creating copy
-# S.C: O(N) --> Recursive call stack used
+# S.C: O(N)   --> Recursive call stack used
+
+
+# Template
+
+'''
+result, pairs = [], []
+
+backtrack(i):
+    # Base condition
+
+    Loop through HashMap
+
+        Add to pairs
+        backtrack(i+1)
+
+        # UNDO
+        POP from pairs
+
+backtrack(0)
+return result
+'''

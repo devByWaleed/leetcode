@@ -1,43 +1,40 @@
 from typing import List
 
 class Solution:
-    def permmute(self, nums: List[int]) -> List[List[int]]:
+    def permute(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-
-        # Store all permmutations
+                
+        # Stores final answer
         result = []
-
-        # Current permmutation
+        
+        # Stores single pairs
         perm = []
 
-        # To track which element we have worked on
+        # Track which element we have worked on
         pick = [False] * n
 
         def backtrack(perm, nums, pick):
-            # If we get valid permmutation
+            # Base case to add into result
             if len(perm) == n:
                 result.append(perm.copy())
                 return
 
-            # Picking permutation
             for i in range(n):
-
-                # If number is not picked
+                # If number is not picked yet
                 if not pick[i]:
                     perm.append(nums[i])
                     pick[i] = True
 
-                    # Explore all possibilities
+                    # Backtrack: Check all possibilities
                     backtrack(perm, nums, pick)
 
-                    # Undo the state
+                    # POP ( UNDO )
                     perm.pop()
                     pick[i] = False
 
 
-        # Call bactrack function
+        # Call function with initial value
         backtrack(perm, nums, pick)
-
         return result
 
 
@@ -46,5 +43,31 @@ print(obj.permmute([1, 2, 3]))           # [[1,2,3], [1,3,2], [2,1,3], [2,3,1], 
 print(obj.permmute([0, 1]))              # [[0,1], [1,0]]
 print(obj.permmute([1]))                 # [[1]]
 
-# T.C: O(N * N!)
-# S.C: O(N!)
+# T.C: O(N * N!)   --> N! permutations for N numbers
+# S.C: O(N!)       -->  Recursive call stack used
+
+
+
+# Template
+
+'''
+result, perm = [], []
+pick = [False] * n
+
+backtrack():
+    Base condition
+
+    Loop till n
+        # Not picked
+        Add to perm
+        Set pick[i] to True
+
+        backtrack()
+
+        # UNDO
+        POP from perm
+        Set pick[i] to False
+
+backtrack()
+return result
+'''

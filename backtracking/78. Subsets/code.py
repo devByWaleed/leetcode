@@ -40,6 +40,32 @@ print(obj.sub_sets([0]))                 # [[], [0]]
 
 
 
+
+
+# Template
+
+'''
+result, sub_sets = [], []
+
+backtrack(i):
+    Base condition
+
+    # Backtrack
+    backtrack(i+1)
+
+    # Picked picked
+    Add to sub_sets
+    backtrack(i+1)
+
+    # UNDO
+    POP from sub_sets
+
+backtrack(0)
+return result
+'''
+
+
+
 # Answer in reversed form
 '''
 from typing import List

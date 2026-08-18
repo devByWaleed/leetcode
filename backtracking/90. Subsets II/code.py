@@ -46,3 +46,33 @@ print(obj.subsetsWithDup([0]))                 # [[], [0]]
 
 # T.C: O(N * 2^N) --> 2^N sub_sets for N numbers
 # S.C: O(N)       --> Recursive call stack used
+
+
+# Template
+
+'''
+result, sub_sets = [], []
+
+backtrack(i):
+    Base condition
+
+    # Backtrack
+    backtrack(i+1)
+
+    # Picked picked
+    Add to sub_sets
+    backtrack(i+1)
+
+    index = i + 1
+    while index is in range & both index'values matches
+        increment i with 1
+
+    # UNDO
+    POP from sub_sets
+
+    # Backtrack
+    backtrack(index)
+
+backtrack(0)
+return result
+'''
