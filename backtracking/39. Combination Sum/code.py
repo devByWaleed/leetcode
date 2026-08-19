@@ -3,41 +3,40 @@ from typing import List
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         n = len(candidates)
-
-        # Store all combinations
+                
+        # Stores final answer
         result = []
+        
+        # Stores single pairs
+        comb = []
 
-        # Current combination
-        path = []
-
-        # Calculating sum
+        # Track current total
         total = 0
 
-        def backtrack(i, path, total):
-            # # If we find sum, add the combination
+
+        def backtrack(i, total):
+            # Base case to add into result
             if total == target:
-                result.append(path.copy())
+                result.append(comb.copy())
                 return
 
-            # Invalid sum
-            if i == n or target < total:
+            # Invalid Sum conditions
+            if i == n or total > target:
                 return
             
-            # Pick candidates[i]
-            path.append(candidates[i])
+            # Backtrack: Include this number
+            comb.append(candidates[i])
+            backtrack(i, total + candidates[i])
 
-            # Many occurences
-            backtrack(i, path, total+candidates[i])
+            # POP ( UNDO )
+            comb.pop()
 
-            # UNDO the step
-            path.pop()
+            # Backtrack: Skip this number
+            backtrack(i+1, total)
 
-            # Call for next element
-            backtrack(i+1, path, total)
 
-        # Call bactrack function for 1st element
-        backtrack(0, path, total)
-
+        # Call function with initial value
+        backtrack(0, total)
         return result
 
 
@@ -46,5 +45,31 @@ print(obj.combinationSum([2, 3, 6, 7], 7))              # [[2,2,3],[7]]
 print(obj.combinationSum([2, 3, 5], 8))                 # [[2,2,2,2],[2,3,3],[3,5]]
 print(obj.combinationSum([2], 1))                       # []
 
-# T.C: O(K * 2^T), O(N ^ (T/M))
-# S.C: O(N)
+# T.C: O(K * 2^T), O(N ^ (T/M))  --> where T is the target, M is the minimum value in candidates, and N is the length of candidates.
+# S.C: O(N)                      -->  Recursive call stack used
+
+
+# Template
+
+'''
+result, comb = [], []
+total = 0
+
+backtrack(i,total):
+    Base condition
+
+    Invalid sum condition
+
+    # Not picked
+    Add to comb
+
+    backtrack(i,total+candidate[i])
+
+    # UNDO
+    POP from comb
+    
+    backtrack(i+1,total)
+
+backtrack(0,total)
+return result
+'''
