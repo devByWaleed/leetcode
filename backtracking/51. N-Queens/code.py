@@ -2,58 +2,72 @@ from typing import List
 
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        # n x n board
+        # Base case: n == 1
+        if n == 1:
+            return [["Q"]]
+
+        # Stores final answer: n x n board
         result = []
-
-        # Current row
-        path = [["."] * n for _ in range(n)]
-
+        
+        # Stores single pair: Rows with default value
+        queen = [["."] * n for _ in range(n)]
+        '''
+        [
+            [".", ".", ".", "."],
+            [".", ".", ".", "."],
+            [".", ".", ".", "."],
+            [".", ".", ".", "."]
+        ]
+        '''
 
         def is_safe(row, col):
             # Column checking
+            # Row in loop bcz col is a loop variable
             for i in range(row):
-                if path[i][col] == "Q":
+                if queen[i][col] == "Q":
+                    # It is attack area
                     return False
-                
-            # Left upper diagonal (row-- , col--)
+
+            # Upper-Left diagonal (row-- , col--)
             for i, j in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
-                if path[i][j] == "Q":
+                if queen[i][j] == "Q":
                     return False
-            
-            
-            # Right upper diagonal (row-- , col++)
-            for i, j in zip(range(row - 1, -1, -1), range(col + 1, n)):
-                if path[i][j] == "Q":
+
+            # Upper-Right diagonal (row-- , col++)
+            for i, j in zip(range(row - 1, -1, -1), range(col + 1, n, +1)):
+                if queen[i][j] == "Q":
                     return False
-                
+
+            # No attack at this place
             return True
+        
 
-
-        def backtrack(row, n):
+        def backtrack(row):
+            # Base case to add into result
             if row == n:
-                result.append(["".join(r) for r in path])
+                result.append(["".join(r) for r in queen])
                 return
-            
+
             for col in range(n):
                 if is_safe(row, col):
-                    path[row][col] = "Q"
+                    # Placing queen
+                    queen[row][col] = "Q"
 
-                    # Backtrack
-                    backtrack(row+1, n)
+                    # Backtrack: Next row
+                    backtrack(row+1)
+                    
+                    # POP ( UNDO )
+                    queen[row][col] = "."
+            
 
-                    # UNDO the step
-                    path[row][col] = "."
-
-
-        # Call bactrack function for 1st number
-        backtrack(0, n)
-
+        # Call function with initial value
+        backtrack(0)
         return result
 
-
+    
 obj = Solution()
 print(obj.solveNQueens(4))       # [[".Q..","...Q","Q...","..Q."], ["..Q.","Q...","...Q",".Q.."]]
 print(obj.solveNQueens(1))       # [["Q"]]
 
-# T.C: O(N!)
-# S.C: O(N^2)
+# T.C: O(N!)        --> Number of valid placements explored
+# S.C: O(N^2)       --> Recursive call stack used "NxN Matrix"
