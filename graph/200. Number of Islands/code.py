@@ -2,46 +2,52 @@ from typing import List
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
+        # directions = [(0,-1), (0,1), (-1,0), (1,0)]
 
         def explore(grid, r, c, visited):
-            # Out of bound boundary checks
+            # Edge case: Index out of range
             row_inbound = 0 <= r and r < len(grid)
             col_inbound = 0 <= c and c < len(grid[0])
 
             if not row_inbound or not col_inbound:
                 return False
             
-            # For WATER
+            # If water, then there is no island
             if grid[r][c] == "0":
                 return False
-            
-            # Current position
+
             pos = f"{r},{c}"
 
-            # BREAK infinite loop 
+            # Already checked
             if pos in visited:
                 return False
-            
+
+            # Add to set to keep track
             visited.add(pos)
 
-            # All 4 DIRECTIONS
-            explore(grid, r-1, c, visited)  # UP
-            explore(grid, r+1, c, visited)  # DOWN
-            explore(grid, r, c-1, visited)  # LEFT
-            explore(grid, r, c+1, visited)  # RIGHT
+            # Explore all 4 directions
+            explore(grid, r, c-1, visited)      # LEFT
+            explore(grid, r, c+1, visited)      # RIGHT
+            explore(grid, r-1, c, visited)      # UP
+            explore(grid, r+1, c, visited)      # DOWN
 
+            # After exploration, we found Island
             return True
 
-
+        # Set to break infinite loop
         visited = set()
-        count = 0
-        for r in range(0, len(grid), 1):
-            for c in range(0, len(grid[0]), 1):
-                if explore(grid, r, c, visited):
-                    count += 1
 
-        return count
-    
+        # Final count of islands
+        islands = 0
+
+        # Grid Iteration
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if explore(grid, r, c, visited):
+                    islands += 1
+
+        return islands
+
 
 obj = Solution()
 print(obj.numIslands([
@@ -57,5 +63,5 @@ print(obj.numIslands([
   ["0","0","0","1","1"]
 ]))  # -> 3
 
-# T.C: O(M * N)
-# S.C: O(M * N)
+# T.C: O(M * N)    --> Loop through M * N grid
+# S.C: O(M * N)    --> M * N call stack used

@@ -19,6 +19,8 @@ This document records the results of 4 unseen LeetCode problems attempted under 
 
 * **Identified Pattern Upfront:** Game Theory / Modular Math
 * **Time Taken:** 34 minutes
+* **Solution Folder:** [`../../Math/292.%20Nim%20Game/`](../../Math/292.%20Nim%20Game/)
+* **Submittion Link:** https://leetcode.com/problems/nim-game/submissions/2119650677
 
 ### Code Solution
 
@@ -50,9 +52,11 @@ print(obj.canWinNim(4))  # Output: False
 print(obj.canWinNim(1))  # Output: True
 print(obj.canWinNim(2))  # Output: True
 print(obj.canWinNim(5))  # Output: True
+```
 
 
-'''
+- **Submittion Link:**  https://leetcode.com/problems/nim-game/submissions/2119634596
+```python
 class Solution:
     def canWinNim(self, n: int) -> bool:
         # If stones are multiple of 4, no chance to win
@@ -64,12 +68,12 @@ print(obj.canWinNim(4))  # Output: False
 print(obj.canWinNim(1))  # Output: True
 print(obj.canWinNim(2))  # Output: True
 print(obj.canWinNim(5))  # Output: True
-'''
+```
 
 
-
+- **Submittion Link:** https://leetcode.com/problems/nim-game/submissions/2119633284
+```python
 # Logically correct, but TLE
-'''
 class Solution:
     def canWinNim(self, n: int) -> bool:
         stones = n
@@ -106,7 +110,6 @@ print(obj.canWinNim(4))  # Output: False
 print(obj.canWinNim(1))  # Output: True
 print(obj.canWinNim(2))  # Output: True
 print(obj.canWinNim(5))  # Output: True
-'''
 ```
 
 ---
@@ -114,8 +117,9 @@ print(obj.canWinNim(5))  # Output: True
 ## 2. LeetCode 724: Find Pivot Index (Easy)
 
 * **Identified Pattern Upfront:** Prefix Sum
-
 * **Time Taken:** 28 minutes
+* **Solution Folder:** [`../../Arrays/724.%20Find%20Pivot%20Index/`](../../Arrays/724.%20Find%20Pivot%20Index/)
+* **Submittion Link:** https://leetcode.com/problems/find-pivot-index/submissions/2119723294
 
 ### Code Solution
 
@@ -160,8 +164,9 @@ print(obj.pivotIndex([2, 1, -1]))          # Output: 0
 ## 3. LeetCode 560: Subarray Sum Equals k (Medium)
 
 * **Identified Pattern Upfront:** Prefix Sum
-
 * **Time Taken:** 17 minutes
+* **Solution Folder:** [`../../Arrays/560.%20Subarray%20Sum%20Equals%20K/`](../../Arrays/560.%20Subarray%20Sum%20Equals%20K/)
+* **Submittion Link:** https://leetcode.com/problems/subarray-sum-equals-k/submissions/2120450847
 
 ### Code Solution
 
@@ -208,8 +213,9 @@ print(obj.subarraySum([1, 2, 3], 3))  # Output: 2
 ## 4. LeetCode 11: Container With Most Water (Medium)
 
 * **Identified Pattern Upfront:** Two Pointers
-
 * **Time Taken:** 15 minutes
+* **Solution Folder:** [`../../2%20Pointers/11.%20Container%20With%20Most%20Water/`](../../2%20Pointers/11.%20Container%20With%20Most%20Water/)
+* **Submittion Link:** https://leetcode.com/problems/container-with-most-water/submissions/2120476405
 
 ### Code Solution
 

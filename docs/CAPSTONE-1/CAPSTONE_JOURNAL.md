@@ -70,7 +70,6 @@ def query_sum(left: int, right: int) -> int:
 - Hash-Set
     1. Without Repetition
     1. Contains Duplicate
-    1. 
 
 #### Template
 
@@ -111,7 +110,6 @@ if x in seen:
 1. Array Is Sorted
 1. In-Place
 1. Pair
-1. 
 
 #### Template
 
