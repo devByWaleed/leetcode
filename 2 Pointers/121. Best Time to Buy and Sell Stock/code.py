@@ -2,46 +2,35 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
 
-        # Base case for small length
-        if len(prices) < 2:
-            return 0
-        
-        # 2 pointers to keep track of profit
-        buy_time = 0
-        sell_time = 1
+        # Define Two pointers to check stocks
+        buy, sell = 0, 1
 
-        max_profit = 0      # Storing final profit
+        # max_profit stores maximum profit
+        max_profit = 0
 
+        # Looping through array
+        while sell < n:
+            # If profit of sell day < profit of buy, update buy to skip it
+            if prices[sell] < prices[buy]:
+                buy = sell
 
-        # Condition for looping over the array
-        while buy_time < sell_time and sell_time < len(prices):
-
-            # Sell time will be greater than buy time
-            if prices[sell_time] > prices[buy_time]:
-
-                # Calculating profit
-                current_profit = prices[sell_time] - prices[buy_time]
-
-                # Updating with maximum profit
-                if current_profit > max_profit:
-                    max_profit = current_profit
-
-
-            # Update buy time with sell time as (buy < sell)
+            # If profit is greater, update max_profit
             else:
-                buy_time = sell_time
+                profit = prices[sell] - prices[buy]
+                max_profit = max(max_profit, profit)
 
-            # Incrementing for whole array traversal
-            sell_time += 1
-        
+            # Update sell for iteration
+            sell += 1
 
+        # At the end, return maximum profit
         return max_profit
 
-
+        
 obj = Solution()
 print(obj.maxProfit([7, 1, 5, 3, 6, 4]))     # 5
 print(obj.maxProfit([7, 6, 4, 3, 1]))        # 0
 
-# T.C: O(N)
-# S.C: O(1)
+# T.C: O(N)     --> Looping through N numbers array
+# S.C: O(1)     --> No data structure used

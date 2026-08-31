@@ -1,39 +1,33 @@
 from typing import List
 
-'''
-For looking a number with current one to satisfy any condition,
-we use difference pattern (a mathematical perspective)
-'''
-
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-
-        n = len(nums)
-
-        # Using hash map for constant time operation
+        # Define HashMap to store difference for constant lookup
         hash_map = {}
 
-        for i in range(n):
-
-            # calculating difference
+        # Loop through the array
+        for i in range(len(nums)):
+            # Calculate difference = target - nums[i]
+            '''
+            For looking a number with current one to satisfy any condition,
+            we use difference pattern (a mathematical perspective)
+            '''
             difference = target - nums[i]
-            
-            # If not found in hash map, it includes number as key & index as value
-            if difference not in hash_map:
-                hash_map[nums[i]] = i
 
-            # If found, return that index of hashmap and current loop's value
+            # Check if difference in HashMap
+            if difference in hash_map:
+                # If yes then return both indices i.e., [i, HashMap[difference]]
+                return [i, hash_map[difference]]
+
+            # If no, then add {nums[i], i} to HashMap
             else:
-                return [hash_map[difference], i]
+                hash_map[nums[i]] = hash_map.get(nums[i], 0) + i
 
-        # Edge case for not founding anything
-        return []
-
-
+                
 obj = Solution()
 print(obj.twoSum([2, 7, 11, 15], 9))   # [0, 1]
 print(obj.twoSum([3, 2, 4], 6))        # [1, 2]
 print(obj.twoSum([3, 3], 6))           # [0, 1]
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(N)     --> Loop through N numbers array
+# S.C: O(N)     --> HashMap of N numbers used
