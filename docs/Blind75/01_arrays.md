@@ -200,6 +200,63 @@ print(obj.productExceptSelf([-1, 1, 0, -3, 3]))     # [0, 0, 9, 0, 0]
 
 ---
 
+## 5. LeetCode 53: Maximum Subarray (Difficulty)
+
+* **Identified Pattern Upfront:** Running sum / MAX tracking
+* **Time Taken:** 43 minutes
+* **Solution Folder:** [`../../greedy/53.%20Maximum%20Subarray/`](../../greedy/53.%20Maximum%20Subarray/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/maximum-subarray/submissions/2129179589)
+
+### Code Solution
+
+```python
+from typing import List
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        curr_sum = max_sum = nums[0]
+
+        for i in range(1, n):
+            # Choice 1: Creating new sub-array
+            ch1 = nums[i]
+
+            # Choice 2: Extending current window
+            ch2 = curr_sum + nums[i]
+
+            # Maximum of 2 choices
+            curr_sum = max(ch1, ch2)
+            
+            # Updating maximum sub-array sum
+            max_sum = max(max_sum, curr_sum)
+
+        return max_sum
+
+
+obj = Solution()
+print(obj.maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))     # 6
+print(obj.maxSubArray([1]))     # 1
+print(obj.maxSubArray([5, 4, -1, 7, 8]))     # 23
+
+# T.C: O(N)     --> Looping through array
+# S.C: O(1)     --> No data structure used
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
 ## 1. LeetCode No.: Name (Difficulty)
 
 * **Identified Pattern Upfront:** 
