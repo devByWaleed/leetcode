@@ -243,8 +243,105 @@ print(obj.maxSubArray([5, 4, -1, 7, 8]))     # 23
 # S.C: O(1)     --> No data structure used
 ```
 
+---
+
+## 6. LeetCode 152: Maximum Product Subarray (Medium)
+
+* **Identified Pattern Upfront:** Running product / MAX tracking
+* **Time Taken:** 45 minutes
+* **Solution Folder:** [`../../greedy/152.%20Maximum%20Product%20Subarray/`](../../greedy/152.%20Maximum%20Product%20Subarray/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/maximum-product-subarray/submissions/2131616895)
+
+### Code Solution
+
+```python
+from typing import List
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        ans = max_product = min_product = nums[0]
+
+        for i in range(1, n):
+            # Negative number handling ; max_products always evaluates to higer product
+            if nums[i] < 0:
+                max_product, min_product = min_product, max_product
 
 
+            # Minimum of 2 choices
+            # Choice 1: Creating new sub-array ; Choice 2: Extending current window
+            min_product = min(nums[i], min_product * nums[i])
+
+            # Maximum of 2 choices
+            # Choice 1: Creating new sub-array ; Choice 2: Extending current window
+            max_product = max(nums[i], max_product * nums[i])
+
+            ans = max(ans, max_product)
+
+        return ans
+
+
+obj = Solution()
+print(obj.maxProduct([2, 3, -2, 4]))             # 6
+print(obj.maxProduct([-2, 0, -1]))               # 0
+print(obj.maxProduct([-2, 3, -4]))               # 24
+print(obj.maxProduct([2, -5, -2, -4, 3]))        # 6
+
+# T.C: O(N)     --> Looping through array
+# S.C: O(1)     --> No data structure used
+```
+
+---
+
+## 7. LeetCode 11: Container With Nosst Water (Difficulty)
+
+* **Identified Pattern Upfront:** Two Pointers
+* **Time Taken:** 15 minutes
+* **Solution Folder:** [`../../2%20Pointers/11.%20Container%20With%20Most%20Water/`](../../2%20Pointers/11.%20Container%20With%20Most%20Water/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/container-with-most-water/submissions/2120476405)
+
+### Code Solution
+
+```python
+from typing import List
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        n = len(height)
+        
+        # calculating total water
+        max_water = 0
+
+        # 2 pointers
+        left, right = 0, n - 1
+
+        # Condition
+        while left <= right:
+            # Calculating total water
+            # Minimum bcz we can store the water upto the minimum bar
+            area = (right - left) * min(height[left], height[right])
+
+            # Update with maximum
+            max_water = max(area, max_water)
+
+            # Move pointers
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+            
+
+        return max_water
+
+
+obj = Solution()
+print(obj.maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))  # Output: 49
+print(obj.maxArea([1, 1]))                       # Output: 1
+
+# T.C: O(N)     --> Loop on N numbers
+# S.C: O(1)     --> No data structure usued
+```
 
 
 
