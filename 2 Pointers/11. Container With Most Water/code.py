@@ -34,4 +34,4 @@ print(obj.maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))  # Output: 49
 print(obj.maxArea([1, 1]))                       # Output: 1
 
 # T.C: O(N)     --> Loop on N numbers
-# S.C: O(1)     --> No data structure usued
+# S.C: O(1)     --> No data structure used
