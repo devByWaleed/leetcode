@@ -46,5 +46,5 @@ print(obj.findMin([3, 4, 5, 1, 2]))              # 1
 print(obj.findMin([4, 5, 6, 7, 0, 1, 2]))        # 0
 print(obj.findMin([11, 13, 15, 17]))             # 11
 
-# T.C: O(LOG N)             --> Binary Search used
+# T.C: O(LOG N)             --> Binary Search used; dividing boundary into half
 # S.C: O(1)                 --> No data structure used
