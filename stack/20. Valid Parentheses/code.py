@@ -1,35 +1,35 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        # Stack for verifying pair
         stack = []
 
-        # For constant lookup
-        pairs = { "(": ")", "{": "}", "[": "]" }
-
-        for char in s:
-            
-            # If opening one, push to stack
-            if char == "(" or char == "{" or char == "[":
-                stack.append(char)
+        for i in range(len(s)):
+            # For opening
+            if s[i] == "(" or s[i] ==  "{" or s[i] ==  "[":
+                stack.append(s[i])
             else:
-
-                # Edge case => empty stack
                 if stack:
-
-                    # Popping & matching
-                    curr = stack.pop()
-                    if pairs[curr] == char:
+                    top = stack.pop()
+                    
+                    # Pair Matching
+                    if (
+                        (top == "(" and s[i] == ")") or 
+                        (top == "{" and s[i] == "}") or 
+                        (top == "[" and s[i] == "]")
+                    ):
                         continue
-                    # If pair not matches
                     else:
+                        # No matching pair
                         return False
-                # If stack is empty => invalid pair
+                # Stack is empty
                 else:
                     return False
-            
-        # After loop, if stack is empty => True / not empty => False
-        return not stack
 
 
+        # If stack is empty, parenthesis is valid
+        return False if stack else True
+
+        
 obj = Solution()
 print(obj.isValid("()"))        # True
 print(obj.isValid("()[]{}"))    # True
@@ -37,5 +37,5 @@ print(obj.isValid("(]"))        # False
 print(obj.isValid("([])"))      # True
 print(obj.isValid("([)]"))      # False
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(N)     —> Looping through string
+# S.C: O(1)     —> Stack data structure used

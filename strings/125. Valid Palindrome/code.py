@@ -1,38 +1,30 @@
-import re
-
 class Solution:
-
     def isPalindrome(self, s):
-        
-        s = s.replace(" ", "")
+        # New string
+        cleaned_text = "".join(char for char in s if char.isalnum()).lower()
+        n = len(cleaned_text)
 
-        s = s.lower()
+        # 2 Pointers
+        left, right = 0, n - 1
 
-        s = re.sub(r'[^a-zA-Z0-9]', "", s)
-
-        if s == "":     return True
-
-        n = len(s)
-
-        l = 0
-        r = n - 1
-
-        while l < r:
-            if s[l] != s[r]:
+        while left < right:
+            # Checking for palindrome
+            if cleaned_text[left] != cleaned_text[right]:
                 return False
-            
-            l += 1
-            r -= 1
+            else:
+                # Pointer movement
+                left += 1
+                right -= 1
 
+        # String in palindrome
         return True
 
-
+        
 obj = Solution()
+print(obj.isPalindrome("A man, a plan, a canal:Panama"))    # True
+print(obj.isPalindrome(" "))                                # True
+print(obj.isPalindrome("race a car"))                       # False
+print(obj.isPalindrome("0P"))                               # False
 
-print(obj.isPalindrome("race a car"))
-print(obj.isPalindrome(" "))
-print(obj.isPalindrome("A man, a plan, a canal:Panama"))
-print(obj.isPalindrome("0P"))
-
-# T.C: O(N)
-# S.C: O(1)
+# T.C: O(N)     —> Looping through string
+# S.C: O(1)     —> No data structure used
