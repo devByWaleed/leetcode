@@ -204,7 +204,7 @@ print(obj.productExceptSelf([-1, 1, 0, -3, 3]))     # [0, 0, 9, 0, 0]
 
 * **Identified Pattern Upfront:** Running sum / MAX tracking
 * **Time Taken:** 43 minutes
-* **Solution Folder:** [`../../Greedy/53.%20Maximum%20Subarray/`](../../Greedy/53.%20Maximum%20Subarray/)
+* **Solution Folder:** [`../../Greedy-Algo53.%20Maximum%20Subarray/`](../../Greedy-Algo53.%20Maximum%20Subarray/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/maximum-subarray/submissions/2129179589)
 
 ### Code Solution
@@ -249,7 +249,7 @@ print(obj.maxSubArray([5, 4, -1, 7, 8]))     # 23
 
 * **Identified Pattern Upfront:** Running product / MAX tracking
 * **Time Taken:** 45 minutes
-* **Solution Folder:** [`../../Greedy/152.%20Maximum%20Product%20Subarray/`](../../Greedy/152.%20Maximum%20Product%20Subarray/)
+* **Solution Folder:** [`../../Greedy-Algo152.%20Maximum%20Product%20Subarray/`](../../Greedy-Algo152.%20Maximum%20Product%20Subarray/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/maximum-product-subarray/submissions/2131616895)
 
 ### Code Solution

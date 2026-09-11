@@ -10,7 +10,7 @@ This part contains problems related to `Strings`, `Two-Pointers`, `Stack`, `Hash
 
 * **Identified Pattern Upfront:** Two Pointers
 * **Time Taken:** 20 minutes
-* **Solution Folder:** [`../../Strings/125.%20Valid%20Palindrome/`](../../Strings/125.%20Valid%20Palindrome/)
+* **Solution Folder:** [`../../String/125.%20Valid%20Palindrome/`](../../String/125.%20Valid%20Palindrome/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/valid-palindrome/submissions/2135871193)
 
 ### Code Solution
@@ -109,7 +109,7 @@ print(obj.isValid("([)]"))      # False
 
 * **Identified Pattern Upfront:** HashMap / Frequency-Table
 * **Time Taken:** 15 minutes
-* **Solution Folder:** [`../../Strings/242.%20Valid%20Anagram/`](../../Strings/242.%20Valid%20Anagram/)
+* **Solution Folder:** [`../../String/242.%20Valid%20Anagram/`](../../String/242.%20Valid%20Anagram/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/valid-anagram/submissions/2135945041)
 
 ### Code Solution
