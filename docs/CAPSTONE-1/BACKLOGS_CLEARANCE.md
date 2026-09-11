@@ -96,7 +96,7 @@ print(obj.moveZeroes([1, 0]))               # [1, 0]
 ## 2. LeetCode 459: Repeated Substring Pattern
 
 ### Pattern: String matching / Knuth-Morris-Pratt (KMP) algorithm
-* **Solution Folder:** [`../../strings/459.%20Repeated%20Substring%20Pattern/`](../../strings/459.%20Repeated%20Substring%20Pattern/)
+* **Solution Folder:** [`../../Strings/459.%20Repeated%20Substring%20Pattern/`](../../Strings/459.%20Repeated%20Substring%20Pattern/)
 * **Submittion Link:** https://leetcode.com/problems/repeated-substring-pattern/submissions/2121597837
 
 ```python

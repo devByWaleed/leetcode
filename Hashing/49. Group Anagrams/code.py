@@ -2,39 +2,39 @@ from typing import List
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-
-        # Edge Case for only 1 element
+        # Base case
         if len(strs) == 1:
             return [strs]
 
-
-        anagram_map = {}
-
-        # Array to store final pair
+        # Store final answer
         result = []
 
-        for strings in strs:
+        # To store anagrams
+        anagram_map = {}
 
-            # Creating a copy then sorted it
-            sorted_str = strings
-            sorted_str = "".join(sorted(sorted_str))
 
-            # Updating the hashmap with sorted one as key and iterators as value inside []
-            anagram_map[sorted_str] = anagram_map.get(sorted_str, [])
-            anagram_map[sorted_str].append(strings)
+        for ang in strs:
+            # Create sorted string for checking anagram
+            sorted_string = "".join(sorted(ang))
 
-        # Appending the pairs in result array
-        for pair in reversed(anagram_map.values()):
-            result.append(pair)
+            # Initializing array to store anagrams / add the pair
+            anagram_map[sorted_string] = anagram_map.get(sorted_string, [])
+
+            # Add to respective key
+            anagram_map[sorted_string].append(ang)
+
+        # Adding anagrams-array to result
+        for i in anagram_map.values():
+            result.append(i)
 
         return result
-
-
+    
+        
 # Answer can be in any order (order of the grouped anagrams or result array)
 obj = Solution()
 print(obj.groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))     # [["bat"], ["nat","tan"], ["ate","eat","tea"]]
 print(obj.groupAnagrams([""]))                                           # [[""]]
 print(obj.groupAnagrams(["a"]))                                          # [["a"]]
 
-# T.C: O(N * KLogK)
-# S.C: O(N * K)
+# T.C: O(N * KLogK)     --> Looping through N elements with sorting each element of K length
+# S.C: O(N * K)         --> HashMap used for storing sorted pairs array for N elements

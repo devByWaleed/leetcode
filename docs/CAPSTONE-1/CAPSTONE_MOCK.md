@@ -214,7 +214,7 @@ print(obj.subarraySum([1, 2, 3], 3))  # Output: 2
 
 * **Identified Pattern Upfront:** Two Pointers
 * **Time Taken:** 15 minutes
-* **Solution Folder:** [`../../2%20Pointers/11.%20Container%20With%20Most%20Water/`](../../2%20Pointers/11.%20Container%20With%20Most%20Water/)
+* **Solution Folder:** [`../../Two-Pointers/11.%20Container%20With%20Most%20Water/`](../../Two-Pointers/11.%20Container%20With%20Most%20Water/)
 * **Submittion Link:** https://leetcode.com/problems/container-with-most-water/submissions/2120476405
 
 ### Code Solution

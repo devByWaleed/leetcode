@@ -1,6 +1,6 @@
 # Blind 75 Part 1: Arrays
 
-This part contains problems related to `Arrays`, `Hash-Tables`, `Two-Pointers`, `Binary Search`
+This part contains problems related to `Arrays`, `Hash-Tables`, `Two-Pointers`, `Binary-Search`
 
 `Total Count = 10`
 
@@ -56,7 +56,7 @@ print(obj.twoSum([3, 3], 6))           # [0, 1]
 
 * **Identified Pattern Upfront:** Arrays / Two Pointers
 * **Time Taken:** 27 minutes
-* **Solution Folder:** [`../../2%20Pointers/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock/`](../../2%20Pointers/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock/)
+* **Solution Folder:** [`../../Two-Pointers/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock/`](../../Two-Pointers/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/submissions/2125804110)
 
 ### Code Solution
@@ -204,7 +204,7 @@ print(obj.productExceptSelf([-1, 1, 0, -3, 3]))     # [0, 0, 9, 0, 0]
 
 * **Identified Pattern Upfront:** Running sum / MAX tracking
 * **Time Taken:** 43 minutes
-* **Solution Folder:** [`../../greedy/53.%20Maximum%20Subarray/`](../../greedy/53.%20Maximum%20Subarray/)
+* **Solution Folder:** [`../../Greedy/53.%20Maximum%20Subarray/`](../../Greedy/53.%20Maximum%20Subarray/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/maximum-subarray/submissions/2129179589)
 
 ### Code Solution
@@ -249,7 +249,7 @@ print(obj.maxSubArray([5, 4, -1, 7, 8]))     # 23
 
 * **Identified Pattern Upfront:** Running product / MAX tracking
 * **Time Taken:** 45 minutes
-* **Solution Folder:** [`../../greedy/152.%20Maximum%20Product%20Subarray/`](../../greedy/152.%20Maximum%20Product%20Subarray/)
+* **Solution Folder:** [`../../Greedy/152.%20Maximum%20Product%20Subarray/`](../../Greedy/152.%20Maximum%20Product%20Subarray/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/maximum-product-subarray/submissions/2131616895)
 
 ### Code Solution
@@ -298,7 +298,7 @@ print(obj.maxProduct([2, -5, -2, -4, 3]))        # 6
 
 * **Identified Pattern Upfront:** Two Pointers
 * **Time Taken:** 15 minutes
-* **Solution Folder:** [`../../2%20Pointers/11.%20Container%20With%20Most%20Water/`](../../2%20Pointers/11.%20Container%20With%20Most%20Water/)
+* **Solution Folder:** [`../../Two-Pointers/11.%20Container%20With%20Most%20Water/`](../../Two-Pointers/11.%20Container%20With%20Most%20Water/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/container-with-most-water/submissions/2120476405)
 
 ### Code Solution
@@ -349,7 +349,7 @@ print(obj.maxArea([1, 1]))                       # Output: 1
 
 * **Identified Pattern Upfront:** Two-Pointers
 * **Time Taken:** 43 minutes
-* **Solution Folder:** [`../../2%20Pointers/15.%203Sum/`](../../2%20Pointers/15.%203Sum/)
+* **Solution Folder:** [`../../Two-Pointers/15.%203Sum/`](../../Two-Pointers/15.%203Sum/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/3sum/submissions/2132487422)
 
 ### Code Solution
@@ -415,8 +415,8 @@ print(obj.threeSum([0, 0, 0]))                # [[0, 0, 0]]
 
 * **Identified Pattern Upfront:** Binary Search
 * **Time Taken:**  minutes
-* **Solution Folder:** [`../../binary%20search/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array/`](../../binary%20search/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array/)
-* **Submittion Link:** [`Link`]()
+* **Solution Folder:** [`../../Binary-Search/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array/`](../../Binary-Search/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/submissions/2133667904)
 
 ### Code Solution
 
@@ -479,7 +479,7 @@ print(obj.findMin([11, 13, 15, 17]))             # 11
 
 * **Identified Pattern Upfront:** Binary Search
 * **Time Taken:** 48 minutes
-* **Solution Folder:** [`../../binary%20search/33.%20Search%20in%20Rotated%20Sorted%20Array/`](../../binary%20search/33.%20Search%20in%20Rotated%20Sorted%20Array/)
+* **Solution Folder:** [`../../Binary-Search/33.%20Search%20in%20Rotated%20Sorted%20Array/`](../../Binary-Search/33.%20Search%20in%20Rotated%20Sorted%20Array/)
 * **Submittion Link:** [`Link`](https://leetcode.com/problems/search-in-rotated-sorted-array/submissions/2134790155)
 
 ### Code Solution

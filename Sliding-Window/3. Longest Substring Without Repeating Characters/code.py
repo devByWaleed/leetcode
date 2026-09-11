@@ -1,43 +1,39 @@
 # Using Hash-set
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        
-        n = len(s)
-
-        # Hash-set for record of repeated characters
+        max_length = 0
         hash_set = set()
 
-        # For shrinking window
         left = 0
 
-        # Calculate maximum length
-        max_len = 0
-
-        for right in range(n):
-
-            # Remove left-most characters from window
+        for right in range(len(s)):
+            # Shrinking window
             while s[right] in hash_set:
+                # Removing from left side and adjusting window
                 hash_set.remove(s[left])
                 left += 1
 
-            # Adding element if not in set
+            # Add to set
             hash_set.add(s[right])
-            
-            # Updating maximum size
-            max_len = max(max_len, right-left + 1)
 
-        return max_len 
+            # Current window
+            window = right - left + 1
+
+            # Update with maximum
+            max_length = max(max_length, window)
+
+        return max_length
 
 
 obj = Solution()
+print(obj.lengthOfLongestSubstring("pwwkew"))       # 3
 print(obj.lengthOfLongestSubstring("abcabcbb"))     # 3
 print(obj.lengthOfLongestSubstring("bbbbb"))        # 1
-print(obj.lengthOfLongestSubstring("pwwkew"))       # 3
 print(obj.lengthOfLongestSubstring("aab"))          # 2
 print(obj.lengthOfLongestSubstring("dvdf"))         # 3
 
-# T.C: O(N)
-# S.C: O(1)
+# T.C: O(N)     --> Looping through string
+# S.C: O(1)     --> HashSet used, but it never holds more than 1 same character
 
 
 
