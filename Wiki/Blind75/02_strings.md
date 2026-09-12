@@ -19,15 +19,25 @@ This part contains problems related to `Strings`, `Two-Pointers`, `Stack`, `Hash
 class Solution:
     def isPalindrome(self, s):
         # New string
-        cleaned_text = "".join(char for char in s if char.isalnum()).lower()
-        n = len(cleaned_text)
+        # cleaned_text = "".join(char for char in s if char.isalnum()).lower()
+        # n = len(cleaned_text)
 
+        n = len(s)
         # 2 Pointers
         left, right = 0, n - 1
 
         while left < right:
+            # If left pointer encounter non-alphanumeric chars
+            if not s[left].isalnum() or s[left] == " ":
+                left += 1
+                continue
+
+            # If right pointer encounter non-alphanumeric chars
+            if not s[right].isalnum() or s[right] == " ":
+                right -= 1
+                continue
             # Checking for palindrome
-            if cleaned_text[left] != cleaned_text[right]:
+            if s[left].lower() != s[right].lower():
                 return False
             else:
                 # Pointer movement
@@ -310,6 +320,265 @@ print(obj.groupAnagrams(["a"]))                                          # [["a"
 # T.C: O(N * KLogK)     --> Looping through N elements with sorting each element of K length
 # S.C: O(N * K)         --> HashMap used for storing sorted pairs array for N elements
 ```
+
+---
+
+## 7. LeetCode 76: Minimum Window Ssubstring (Hard)
+
+* **Identified Pattern Upfront:** Sliding Window
+* **Time Taken:** 44 minutes
+* **Solution Folder:** [`../../Sliding-Window/76.%20Minimum%20Window%20Substring/`](../../Sliding-Window/76.%20Minimum%20Window%20Substring/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/minimum-window-substring/submissions/2138185144)
+
+### Code Solution
+
+```python
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        # Edge Cases
+        if len(t) > len(s) :   return ""
+
+        # Store frequencies of t'chars
+        count_t = {}
+
+        for char in t:
+            count_t[char] = count_t.get(char, 0) + 1
+
+        # Store substrings
+        window = {}
+
+        # have track the occurences of s in t
+        # need is the total frequencies of t
+        have, need = 0, len(count_t.keys())
+
+        # Store final answer
+        min_len = float("inf")
+
+        # Pointers to track sub-string from s
+        min_l, min_r = 0, 0
+
+        # for window shrinking
+        left = 0
+
+        # For window expanding
+        for right in range(len(s)):
+            char = s[right]
+
+            # Update window
+            window[char] = window.get(char, 0) + 1
+
+            # Update on finding t's char
+            if char in count_t and window[char] == count_t[char]:
+                have += 1
+
+            while have == need:
+                if right - left + 1 < min_len:
+                    # Update minimum length & pointers for s
+                    min_len = right - left + 1
+                    min_l = left
+                    min_r = right
+
+                # Shrinking window
+                left_char = s[left]
+                window[left_char] -= 1
+                left += 1
+
+                # Decrement count for validation of window
+                if left_char in count_t and window[left_char] < count_t[left_char]:
+                    have -= 1
+            
+
+        # +1 will add last index element
+        return "" if min_len == float("inf") else s[min_l: min_r+1]
+
+
+obj = Solution()
+print(obj.minWindow("ADOBECODEBANC", "ABC"))        # BANC
+print(obj.minWindow("a", "a"))                      # a
+print(obj.minWindow("a", "aa"))                     # ""
+
+# T.C: O(M + N)     --> Loop through string "t" + "s"
+# S.C: O(K)         --> HashMap used to store K size window
+```
+
+---
+
+## 8. LeetCode 647: Palindromic Substrings (Medium)
+
+* **Identified Pattern Upfront:** Two-Pointers / DP
+* **Time Taken:** 17 minutes
+* **Solution Folder:** [`../../Two-Pointers/647.%20Palindromic%20Substrings/`](../../Two-Pointers/647.%20Palindromic%20Substrings/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/palindromic-substrings/submissions/2139207859)
+
+### Code Solution
+
+```python
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        n = len(s)
+
+        # Count all substrings
+        total_palindrome = 0
+
+        def expand_towards_center(i, j):
+            # Return total count
+            count = 0
+
+            # Index Inbound & palindrome checking
+            while i >= 0 and j < n and s[i] == s[j]:
+                count += 1
+
+                # Expanding towards center
+                i -= 1
+                j += 1
+
+            return count
+
+        
+        for i in range(n):
+            # Odd length center
+            total_palindrome += expand_towards_center(i, i)
+
+            # Even length center
+            total_palindrome += expand_towards_center(i, i+1)
+
+        # Final count
+        return total_palindrome
+
+
+obj = Solution()
+print(obj.countSubstrings("abc"))       # 3
+print(obj.countSubstrings("aaa"))       # 6
+
+# T.C: O(N ^ 2)     --> Nested looping
+# S.C: O(1)         --> No data structure used
+```
+
+---
+
+## 9. LeetCode 5: Longest Palindromic Substrings (Medium)
+
+* **Identified Pattern Upfront:** Two-Pointers / DP
+* **Time Taken:** 17 minutes
+* **Solution Folder:** [`../../Two-Pointers/5.%20Longest%20Palindromic%20Substring/`](../../Two-Pointers/5.%20Longest%20Palindromic%20Substring/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/longest-palindromic-substring/submissions/2139243834)
+
+### Code Solution
+
+```python
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        n = len(s)
+        
+        # Count all substrings
+        res = ""
+        res_len = 0
+
+        def expand_towards_center(i, j):
+            nonlocal res, res_len
+
+            # Index Inbound & palindrome checking
+            while i >= 0 and j < n and s[i] == s[j]:
+                # Check if current one is longer than already set
+                if j - i + 1 > res_len:
+                    res = s[i : j + 1]
+                    res_len = j - i + 1
+
+                # Expanding towards center
+                i -= 1
+                j += 1
+
+
+        for i in range(n):
+            # Odd length center
+            expand_towards_center(i, i)
+
+            # Even length center
+            expand_towards_center(i, i+1)
+
+        # Final string
+        return res
+
+
+obj = Solution()
+print(obj.longestPalindrome("babad"))       # 3
+print(obj.longestPalindrome("cbbd"))       # 6
+print(obj.longestPalindrome("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+))       # 489
+
+# T.C: O(N ^ 2)     --> Nested looping
+# S.C: O(1)         --> No data structure used
+```
+
+---
+
+## 10. LeetCode 271: Encode and Decode Strings (Medium)
+
+* **Identified Pattern Upfront:** Design / String
+* **Time Taken:** 14 minutes
+* **Solution Folder:** [`../../Design/271.%20Encode%20and%20Decode%20Strings/`](../../Design/271.%20Encode%20and%20Decode%20Strings/)
+* **Submittion Link:** Solved on NeetCode
+
+### Code Solution
+
+```python
+from typing import List
+
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        # Encoded string
+        encoded_s = ""
+
+        # Encoding structure: Length + # + String
+        for s in strs:
+            encoded_s += f"{len(s)}#{s}"
+        
+        return encoded_s
+
+
+    def decode(self, s: str) -> List[str]:
+        # Final answer array
+        result = []
+
+        # Pointer for iteration
+        i = 0
+        while i < len(s):
+            # Pointer to find "#"
+            j = i
+
+            while s[j] != "#":
+                j += 1
+
+            # When "#" finds, extract length
+            length = int(s[i:j])
+
+            # Extract word, length will be excluded
+            word = s[j + 1 : j + 1 + length]
+
+            # Add to result
+            result.append(word)
+
+            # Move pointer i to move towards next word
+            i = j + 1 + length
+
+        return result
+
+
+obj = Solution()
+l1 = obj.encode(["Hello","World"])
+print(obj.decode(l1))       # ["Hello","World"]
+l2 = obj.encode([""])
+print(obj.decode(l2))       # [""]
+
+# T.C: O(N)     --> Looping through array / string for encode() & decode()
+# S.C: O(N)     --> N length string / array for encode() & decode()
+```
+
+
+
+
 
 
 
