@@ -575,27 +575,3 @@ print(obj.decode(l2))       # [""]
 # T.C: O(N)     --> Looping through array / string for encode() & decode()
 # S.C: O(N)     --> N length string / array for encode() & decode()
 ```
-
-
-
-
-
-
-
-
-
-
-
----
-
-## 1. LeetCode No.: Name (Difficulty)
-
-* **Identified Pattern Upfront:** 
-* **Time Taken:**  minutes
-* **Solution Folder:** [`../../`](../../)
-* **Submittion Link:** [`Link`]()
-
-### Code Solution
-
-```python
-```

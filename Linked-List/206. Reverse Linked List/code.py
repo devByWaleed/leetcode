@@ -13,37 +13,38 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # Edge case
-        if not head or not head.next:
+        # Edge case: head is empty
+        if head is None:
             return head
         
-        # Initializing 3 pointers
+        # Pointer for traversal
         curr = head
-        prev, next_node = None, None
 
-        # Safe condition for traversing
-        while curr is not None:
+        # Pointers for next node + reversed list tracking
+        next_p, prev = None, None
 
-            # Store next node, for tracking rest of list
-            next_node = curr.next
+        # Looping till end of list
+        while curr:
+            # Save next number reference
+            next_p = curr.next
 
-            # Reverse the link
+            # Break the link of "curr"
             curr.next = prev
-            
-            # Move prev, points to current node
+
+            # Adding "curr" into "prev" pointer, making the reversed list
             prev = curr
-            
-            # Move curr to continue loop
-            curr = next_node
 
-        
-        # For printing whole Linked-List
-        '''
-        while prev:
-            print(prev, end=" -> ")
-            prev = prev.next
-        '''
+            # Move curr with saved reference for list traversal
+            curr = next_p
 
+            # For printing whole Linked-List
+            '''
+            while prev:
+                print(prev.val, end=" -> ")
+                prev = prev.next
+            '''
+
+        # Returning reversed list
         return prev
         
 
@@ -68,5 +69,5 @@ print(obj.reverseList(head))        # 2 -> 1
 head = None
 print(obj.reverseList(head))        # None
 
-# T.C: O(N)
-# S.C: O(1)
+# T.C: O(N)     --> Looping through Linked-List
+# S.C: O(1)     --> No data structure used

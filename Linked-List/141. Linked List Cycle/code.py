@@ -13,29 +13,30 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        # Edge case
+        # Edge casee: 1 node
         if not head or not head.next:
             return False
-        
-        # Initialize 2 pointers at head
-        slow, fast = head, head
 
-        # Condition for looping till end of list
+        # Initialize slow & fast pointers
+        slow = head
+        fast = head
+
+        # Looping till end of list
         while fast and fast.next:
-
-            # Moving slow pointer 1 time
+            # 1 time movement
             slow = slow.next
 
-            # Moving slow pointer 2 time
+            # 2 time movement
             fast = fast.next.next
 
-            # If pointers meet, cycle detected. Otherwise no cycle
+            # Checking for same position: cycle found
             if slow == fast:
                 return True
-            
+
+        # No cycle found
         return False
 
-
+        
 obj = Solution()
 
 # Create linked list:
@@ -64,5 +65,5 @@ print(obj.hasCycle(head))       # True
 head = ListNode(1)  # No cycle created
 print(obj.hasCycle(head))       # False
 
-# T.C: O(N)
-# S.C: O(1)
+# T.C: O(N)     --> Looping through Linked-List
+# S.C: O(1)     --> No data structure used

@@ -13,51 +13,41 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        
-        dummy = ListNode(0)     # Dummy node for new merged list
-        curr = dummy        # For traversing in dummy
+        # Pointers for both lists
+        curr_l1 = list1
+        curr_l2 = list2
 
-        # Loop until 1 list finished
-        while list1 and list2:
+        # Dummy node & it's pointer
+        dummy = ListNode(0)
+        curr_dummy = dummy
 
-            # For less & equal values, add list1
-            if list1.val <= list2.val:
-                curr.next = list1
-                curr = curr.next
-                list1 = list1.next
-
-            # For list2 values
+        while curr_l1 and curr_l2:
+            # Add value of list1
+            if curr_l1.val <= curr_l2.val:
+                curr_dummy.next = curr_l1
+                curr_l1 = curr_l1.next
+            # Add value of list2
             else:
-                curr.next = list2
-                curr = curr.next
-                list2 = list2.next
+                curr_dummy.next = curr_l2
+                curr_l2 = curr_l2.next
 
-        # After loop, add non-empty list. Similar to the loops below
-        curr.next = list1 or list2
+            # Move pointer of dummy list
+            curr_dummy = curr_dummy.next
 
-        '''
-        while list1:
-            curr.next = list1
-            curr = curr.next
-            list1 = list1.next
-        
-        while list2:
-            curr.next = list2
-            curr = curr.next
-            list2 = list2.next
-        '''
-
+        # If 1 list becomes empty, add other
+        if not curr_l1:     curr_dummy.next = curr_l2
+        if not curr_l2:     curr_dummy.next = curr_l1
 
         # For printing whole Linked-List
         '''
         while dummy:
-            print(dummy, end=" -> ")
+            print(dummy.val, end=" -> ")
             dummy = dummy.next
         '''
 
-        return dummy.next   # return new head
+        return dummy.next
 
-
+        
 obj = Solution()
 
 # Create linked list:
@@ -86,5 +76,5 @@ list2 = ListNode(0)
 list2.next = None
 print(obj.mergeTwoLists(list1, list2))      # 0
 
-# T.C: O(N + M)
-# S.C: O(1)
+# T.C: O(N + M)     --> Looping through both Linked-List
+# S.C: O(1)         --> No data structure used
