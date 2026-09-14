@@ -12,54 +12,62 @@ class ListNode:
 
 
 class Solution:
-    # def reorderList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-    def reorderList(self, head: Optional[ListNode]) -> None:
-        
-        # Initialize two pointers to find the middle of the linked list
+    def reorderList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    # def reorderList(self, head: Optional[ListNode]) -> None:
+        # 1. Find the middle
         slow, fast = head, head
 
-        # Move slow by 1 step and fast by 2 steps to locate the middle
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
+        second = slow.next
+        slow.next = None
 
-        # Start reversing the second half of the list
-        curr = slow.next        # Head of second half
-        slow.next = None        # Split the list into two halves
-        prev = None             # Will become new head of reversed half
+        # 2. Reversing 2nd half
+        curr = second
+        # Pointers for next node + reversed list tracking
+        next_p, prev = None, None
 
-        # Reverse the second half using three-pointer technique
+        # Looping till end of list
         while curr:
+            # Save next number reference
+            next_p = curr.next
 
-            next_node = curr.next   # Store next node
-            curr.next = prev        # Reverse current node's pointer
-            prev = curr             # Move prev forward
-            curr = next_node        # Move curr forward
+            # Break the link of "curr"
+            curr.next = prev
 
+            # Adding "curr" into "prev" pointer, making the reversed list
+            prev = curr
 
-        # Merge the first half and the reversed second half alternately
-        first, second = head, prev
+            # Move curr with saved reference for list traversal
+            curr = next_p
+
+        # 3. Merging
+        first = head
+        second = prev
 
         while second:
+            # Saving .next reference
+            temp1 = first.next
+            temp2 = second.next
 
-            temp1 = first.next      # Store next node of first half
-            temp2 = second.next     # Store next node of second half
+            # Re-link the pattern
+            first.next = second
+            second.next = temp1
 
-            first.next = second     # Link first node to second
-            second.next = temp1     # Link second node back to first half
+            # Moving forward
+            first = temp1
+            second = temp2
 
-            first = temp1           # Move first pointer forward
-            second = temp2          # Move second pointer forward
-
-        
         # For printing whole Linked-List
         '''
         while head:
-            print(head, end=" -> ")
+            print(head.val, end=" -> ")
             head = head.next
         '''
 
+        # Returning merged list
         # return head
 
         
@@ -79,5 +87,5 @@ head.next.next.next = ListNode(4)
 head.next.next.next.next = ListNode(5)
 print(obj.reorderList(head))        # 1 -> 5 -> 2 -> 4 -> 3
 
-# T.C: O(N)
-# S.C: O(1)
+# T.C: O(N)     --> Looping through Linked-List
+# S.C: O(1)     --> No data structure used
