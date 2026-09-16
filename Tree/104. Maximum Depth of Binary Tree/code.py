@@ -15,39 +15,37 @@ class TreeNode:
 
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        # Edge case
+        # Edge case: Empty Tree
         if root == None:
             return 0
-        
-        # Creating deque with root for constant removal
-        queue = deque([root])
-        
-        # Store maximum depth
-        max_depth = 0
+
+        # Creating deque for constant node removal
+        queue = deque([ root ])
+
+        # Final depth count
+        depth = 0
 
         while queue:
-
-            # Calculating number of nodes in current level
+            # Get size of current level
             level = len(queue)
 
-            # Increment depth by 1 for current existed level
-            max_depth += 1
-
-
-            # Looping through the total nodes in current level
             for _ in range(level):
-                curr = queue.popleft()      # Remove root node
-                
-                # Add it's left and right childs
+                # POP current node
+                curr = queue.popleft()
+
+                # Add left & right childs
                 if curr.left:
                     queue.append(curr.left)
+
                 if curr.right:
                     queue.append(curr.right)
+
+            # After processing level
+            depth += 1
+
+        return depth
+
         
-
-        return max_depth
-
-
 obj = Solution()
 
 # Test Case
@@ -66,8 +64,8 @@ root = TreeNode(1)
 root.right = TreeNode(2)
 print(obj.maxDepth(root))     # 2
 
-# T.C: O(N)
-# S.C: O(W)  W = width of tree
+# T.C: O(N)     --> Looping through N nodes
+# S.C: O(W)     --> Queue used for W width tree
 
 
 

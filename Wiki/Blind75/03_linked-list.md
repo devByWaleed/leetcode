@@ -1,4 +1,4 @@
-# Blind 75 Part 2: Linked List
+# Blind 75 Part 3: Linked List
 
 This part contains problems related to `Linked-List`
 
