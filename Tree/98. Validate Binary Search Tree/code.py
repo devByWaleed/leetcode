@@ -15,23 +15,25 @@ class TreeNode:
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
 
-        # Helper function to validate BST
-        def validate(node, low=-float("inf"), high=float("inf")):
+        def validate(node, low = -float("inf"), high = float("inf")):
             # Edge case
             if not node:
                 return True
-            
-            # BST condition
+
+            # Checking for value
             if not (low < node.val < high):
                 return False
-            
-            # Recursive call on left & right child
-            left_BST = validate(node.left, low, node.val)
-            right_BST = validate(node.right, node.val, high)
-            
-            # Return the answer
-            return (left_BST and right_BST)
-        
+
+            # Validate it's left BST
+            left_bst = validate(node.left, low, node.val)
+
+            # Validate it's right BST
+            right_bst = validate(node.right, node.val, high)
+
+            # Final validation
+            return left_bst and right_bst
+
+        # Return answer
         return validate(root)
     
 
@@ -60,9 +62,8 @@ root = TreeNode(1)
 root.left = TreeNode(1)
 print(obj.isValidBST(root))    # True
 
-# T.C: O(N)
-# S.C: O(N)
-
+# T.C: O(N)     --> Working on N nodes
+# S.C: O(N)     --> Recursive call-stack of N size used
 
 # Logical Issues
 '''

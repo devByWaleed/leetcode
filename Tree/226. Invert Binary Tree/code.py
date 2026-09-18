@@ -15,26 +15,36 @@ class TreeNode:
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # Base cases
-        if root == None:
+        # Edge cases: Empty Tree & Only Root
+        if not root:
             return None
-        if not root.left and not root.right:
-            return root
         
-        # Inverting child nodes
-        root.left, root.right = root.right, root.left
-
-        # Inverting sub-childs with recursion
-        self.invertTree(root.left)
-        self.invertTree(root.right)
-
+        
+        def dfs(node):
+            # Base condition: Node is empty
+            if not node:
+                return None
+                
+            # Inverting
+            node.left, node.right = node.right, node.left
+            
+            # Passing left child
+            dfs(node.left)
+            # Passing right child
+            dfs(node.right)
+        
+        
+        # Passing give root
+        dfs(root)
+        
         # Printing Tree in BFS form
         '''
         print(breathFirstSearch(root))
         '''
+        
+        # Returning
         return root
-
-
+        
 '''
 def breathFirstSearch(root):
   # Edge case
@@ -86,5 +96,12 @@ print(obj.invertTree(root))     # 2
 root = None
 print(obj.invertTree(root))     # None
 
-# T.C: O(N)
-# S.C: O(H)  H = height of tree
+# Test Case
+root = 1
+
+#root.left = None
+root.right = 2
+print(obj.invertTree(root))
+
+# T.C: O(N)     --> Function call on N nodes
+# S.C: O(H)     --> Recursive call-stack of height H tree

@@ -15,42 +15,32 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        # Edge cases
-        if root == None:
-            return []
-        
-        if not root.left and not root.right:
-            return [[root.val]]
-        
-        # Creating deque with root for constant removal
-        queue = deque([root])
-
-        # Final array
+        # Final answer
         result = []
-
+        # Queue for BFS
+        queue = deque([ root ])
+        
         while queue:
-
-            # # Calculating number of nodes in current level
+        # Get length for completing level traversal
             level = len(queue)
-
-            # New temporary array for each level
-            temp = []
-
-            # Removing all nodes in level
+            level_nodes = []
+            
             for _ in range(level):
                 curr = queue.popleft()
-                temp.append(curr.val)       # add value to temp, not object
+                # Add current value
+                level_nodes.append(curr.val)
 
+                # Add left & right childs to queue
                 if curr.left:
                     queue.append(curr.left)
                 if curr.right:
                     queue.append(curr.right)
-            
-            result.append(temp)     # Adding current level's nodes as array
-
+                    # Add level's array to result
+            result.append(level_nodes)
+    
         return result
-
-
+   
+        
 obj = Solution()
 
 # Test Case
@@ -71,5 +61,5 @@ print(obj.levelOrder(root))     # [[1]]
 root = None
 print(obj.levelOrder(root))     # []
 
-# T.C: O(N)
-# S.C: O(W)  W = width of tree
+# T.C: O(N)     --> Looping through the queue
+# S.C: O(N)     --> Array used for N nodes

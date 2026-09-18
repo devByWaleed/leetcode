@@ -19,31 +19,31 @@ class Solution:
         rather than creating a new variable inside recursive function
         ''' 
         max_sum = [root.val]
-
+        
         def dfs(root):
-            # Base case
+            # Edge case: Empty Tree
             if not root:
                 return 0
             
-            # Handling left & right childs
+            # Handle left & right childs
             max_left = dfs(root.left)
             max_right = dfs(root.right)
-
-            # Handling -ve values
+            
+            # Handle -ve value
             max_left = max(max_left, 0)
             max_right = max(max_right, 0)
+            
+            # Store max sum
+            max_sum[0] = max(max_sum[0], root.val+max_left+max_right)
 
-            # Calculate max path sum with SPLIT
-            max_sum[0] = max(max_sum[0], root.val + max_left + max_right)
-
-            # Returning sum of valid path by picking either left or right
+            # Return sum of root with either left OR right
             return root.val + max(max_left, max_right)
         
-        
-        # Calling function for calculation
+        # Call function
         dfs(root)
-
-        return max_sum[0]       # Returning max sum
+        
+        # Return Max Path Sum
+        return max_sum[0]
 
 
 obj = Solution()
@@ -67,5 +67,5 @@ root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
 print(obj.maxPathSum(root))    # 42
 
-# T.C: O(N)
-# S.C: O(H)
+# T.C: O(N)     --> Function call on N nodes
+# S.C: O(H)     --> Recursive call-stack of height H tree

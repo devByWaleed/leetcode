@@ -19,26 +19,23 @@ class Solution:
         if not preorder or not inorder:
             return None
         
-        # Creating root node
+        # Create root node
         root = TreeNode(preorder[0])
 
-        # Finding index of root node inside inorder
+        # Find index of current number in inorder array
         mid = inorder.index(preorder[0])
 
-        # Get left child & add it recursively
-        root.left = self.buildTree(preorder[1: mid+1], inorder[:mid])
-        
-        # Get right child & add it recursively
-        root.right = self.buildTree(preorder[mid+1: ], inorder[mid+1: ])
+        # Attaching left & right child recursively
+        root.left = self.buildTree(preorder[1 : mid+1], inorder[: mid])
+        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
 
         # Printing Tree in BFS form
         '''
-        print(breathFirstSearch(root))
+        # print(breathFirstSearch(root))
         '''
 
-        # Return root as newly constructed tree
         return root
-
+        
 
 def breathFirstSearch(root: Optional[TreeNode]):
     if not root:
@@ -83,5 +80,5 @@ in_order = [-1]
 
 print(obj.buildTree(pre_order, in_order))   # -1
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(N)     --> Working on N numbers array
+# S.C: O(N)     --> Recursive call-stack of N size used

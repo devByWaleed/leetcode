@@ -14,34 +14,35 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        # Stack for DFS traversal
         stack = []
-        
-        # Use pointer for nodes tracking
+
+        # Pointer for root
         curr = root
-        
-        # Counter for finding kth value
+
+        # Counter for checking kth value
         counter = 0
 
-        # Loop until all nodes are checked
+        # While traversing BST and getting root
         while stack or curr:
-            
-            # Checking all left nodes
+
             while curr:
+                # Add to stack and move to left childs
                 stack.append(curr)
                 curr = curr.left
 
-            # When reached null, pop and move to
+            # Popping and incrementing counter for k values checking
             curr = stack.pop()
             counter += 1
 
-            # Checking kth value
+            # If kth smallest found, return it's .val
             if counter == k:
                 return curr.val
-            
-            # Move to right side
+
+            # Move to right side of BST
             curr = curr.right
 
-
+        
 obj = Solution()
 
 
@@ -74,8 +75,8 @@ root = TreeNode(1)
 root.right = TreeNode(2)
 print(obj.kthSmallest(root, 2))    # 1
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(H + k)     --> Traversing through H nodes + k lookup
+# S.C: O(H)         --> Stack used for h height BST
 
 
 # Works on strictly left tree
