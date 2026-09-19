@@ -642,6 +642,317 @@ print(obj.kthSmallest(root, 2))    # 1
 # S.C: O(H)         --> Stack used for h height BST
 ```
 
+---
+
+## 8. LeetCode 235: Lowest Common Ancestor of a Binary Search Tree (Medium)
+
+* **Identified Pattern Upfront:** Tree / BST / DFS
+* **Time Taken:** 20 minutes
+* **Solution Folder:** [`../../Tree/235.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/`](../../Tree/235.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/submissions/2146363869)
+
+### Code Solution
+
+```python
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+    # Customize this to show node value during de-bugging
+    def __repr__(self): 
+        return f"{self.val}"
+
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        # Pointer for traversing tree
+        curr = root
+
+        while curr:
+            # If smaller, lies on left side
+            if p.val < curr.val and q.val < curr.val:
+                curr = curr.left
+
+            # If larger, lies on right side
+            elif p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            # Current is the ancestor
+            else:
+                return curr
+
+
+obj = Solution()
+
+
+# Test Case
+root = TreeNode(6)
+
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+
+root.left.right.left = TreeNode(3)
+root.left.right.right = TreeNode(5)
+
+p_node = root.left        # This is the node with value 2
+q_node = root.right       # This is the node with value 8
+print(obj.lowestCommonAncestor(root, p_node, q_node))    # 6
+
+
+# Test Case
+root = TreeNode(6)
+
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+
+root.left.right.left = TreeNode(3)
+root.left.right.right = TreeNode(5)
+
+p_node = root.left             # This is the node with value 2
+q_node = root.left.right       # This is the node with value 4
+print(obj.lowestCommonAncestor(root, p_node, q_node))    # 2
+
+
+# Test Case
+root = TreeNode(2)
+
+root.left = TreeNode(1)
+
+p_node = root            # This is the node with value 2
+q_node = root.left       # This is the node with value 1
+print(obj.lowestCommonAncestor(root, p_node, q_node))    # 2
+
+# T.C: O(H)     --> Traversing tree to height H
+# S.C: O(1)     --> No data structure used
+```
+
+---
+
+## 9. LeetCode 100: Same Tree (Easy)
+
+* **Identified Pattern Upfront:** Tree / BFS / DFS
+* **Time Taken:** 20 minutes
+* **Solution Folder:** [`../../Tree/100.%20Same%20Tree/)`](../../Tree/100.%20Same%20Tree/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/same-tree/submissions/2146388097)
+
+### Code Solution
+
+```python
+from collections import deque
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+    # Customize this to show node value during de-bugging
+    def __repr__(self): 
+        return f"{self.val}"
+
+    
+class Solution:
+    def isSameTree(self, p: TreeNode | None, q: TreeNode | None) -> bool:
+        # Edge cases
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if p.val != q.val:
+            return False
+
+        # Save root in pair
+        queue = deque([ (p, q) ])
+
+        while queue:
+            # Pop the leftmost
+            node1, node2 = queue.popleft()
+
+            # If both empty, continue
+            if not node1 and not node2:
+                continue
+
+            # 1 is empty or value not matched
+            if not node1 or not node2 or node1.val != node2.val:
+                return False
+
+            # Add left & right childs
+            queue.append((node1.left, node2.left))
+            queue.append((node1.right, node2.right))
+            
+
+        return True
+
+
+obj = Solution()
+
+
+# Test Case 1
+p = TreeNode(1)
+p.left = TreeNode(2)
+p.right = TreeNode(3)
+
+q = TreeNode(1)
+q.left = TreeNode(2)
+q.right = TreeNode(3)
+
+print(obj.isSameTree(p, q))    # True
+
+
+# Test Case 2
+p = TreeNode(1)
+p.left = TreeNode(2)
+
+q = TreeNode(1)
+q.right = TreeNode(2)
+
+print(obj.isSameTree(p, q))    # False
+
+
+# Test Case 3
+p = TreeNode(1)
+p.left = TreeNode(2)
+p.right = TreeNode(1)
+
+q = TreeNode(1)
+q.left = TreeNode(1)
+q.right = TreeNode(2)
+
+print(obj.isSameTree(p, q))    # False
+
+# T.C: O(N)     --> Traversing through every node in the smaller tree once
+# S.C: O(H)     --> Call-Stack used for H height tree
+```
+
+---
+
+## 10. LeetCode 572: Subtree of Another Tree Name (Easy)
+
+* **Identified Pattern Upfront:** Tree / BFS / DFS
+* **Time Taken:** 20 minutes
+* **Solution Folder:** [`../../Tree/572.%20Subtree%20of%20Another%20Tree/`](../../Tree/572.%20Subtree%20of%20Another%20Tree/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/subtree-of-another-tree/submissions/2146409452)
+
+### Code Solution
+
+```python
+from typing import Optional
+from collections import deque
+
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+    # Customize this to show node value during de-bugging
+    def __repr__(self):
+        return f"{self.val}"
+
+
+class Solution:
+    def isSubtree(self, root: Optional['TreeNode'], subRoot: Optional['TreeNode']) -> bool:
+        # Function to check sub_tree
+        def isSameTree(p, q):
+            queue = deque([ (p, q) ])
+
+            while queue:
+                # Pop the leftmost
+                node1, node2 = queue.popleft()
+
+                # If both empty, continue
+                if not node1 and not node2:
+                    continue
+
+                # 1 is empty or value not matched
+                if not node1 or not node2 or node1.val != node2.val:
+                    return False
+
+                # Add left & right childs
+                queue.append((node1.left, node2.left))
+                queue.append((node1.right, node2.right))
+
+            return True
+
+
+        # Working on "root"
+        main_queue = deque([ root ])
+
+        while main_queue:
+            curr = main_queue.popleft()
+
+            if curr.val == subRoot.val:
+                if isSameTree(curr, subRoot):
+                    return True
+                
+            if curr.left:
+                main_queue.append(curr.left)
+            if curr.right:
+                main_queue.append(curr.right)
+        
+        return False
+
+
+obj = Solution()
+
+
+# Test Case 1
+root = TreeNode(3)
+root.left = TreeNode(4)
+root.right = TreeNode(5)
+
+root.left.left = TreeNode(1)
+root.left.right = TreeNode(2)
+
+subRoot = TreeNode(4)
+subRoot.left = TreeNode(1)
+subRoot.right = TreeNode(2)
+
+print(obj.isSubtree(root, subRoot))    # True
+
+
+# Test Case 2
+root = TreeNode(3)
+root.left = TreeNode(4)
+root.right = TreeNode(5)
+
+root.left.left = TreeNode(1)
+root.left.right = TreeNode(2)
+root.left.right.left = TreeNode(0)
+
+subRoot = TreeNode(4)
+subRoot.left = TreeNode(1)
+subRoot.right = TreeNode(2)
+
+print(obj.isSubtree(root, subRoot))    # False
+
+# T.C: O(M * N)     --> N = nodes in root, M = nodes in subRoot (isSame check at each node)
+# S.C: O(max(M,N))         --> Recursion stack, H = height of the root tree
+```
+
+
+
+
+
+
+
+
+
 
 
 

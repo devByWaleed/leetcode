@@ -12,38 +12,20 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        # Starting with root
-        lca = [root]
+        # Pointer for traversing tree
+        curr = root
 
-        def search(root):
-            # Base case
-            if not root:
-                return
-            
-            # update the value for each sub-tree
-            lca[0] = root
+        while curr:
+            # If smaller, lies on left side
+            if p.val < curr.val and q.val < curr.val:
+                curr = curr.left
 
-            # If we found p, q as root, return nothing
-            if root is p or root is q:
-                return
-            
-            # If value is less, search on right side
-            elif root.val < p.val and root.val < q.val:
-                search(root.right)
-            
-            # If value is greater, search on left side
-            elif root.val > p.val and root.val > q.val:
-                search(root.left)
-            
-            # If not found, return nothing
+            # If larger, lies on right side
+            elif p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            # Current is the ancestor
             else:
-                return
-            
-        # Pass to helper function
-        search(root)
-
-        # Return the node
-        return lca[0]
+                return curr
 
 
 obj = Solution()
@@ -96,5 +78,5 @@ p_node = root            # This is the node with value 2
 q_node = root.left       # This is the node with value 1
 print(obj.lowestCommonAncestor(root, p_node, q_node))    # 2
 
-# T.C: O(LOG(N))
-# S.C: O(1)
+# T.C: O(H)     --> Traversing tree to height H
+# S.C: O(1)     --> No data structure used
