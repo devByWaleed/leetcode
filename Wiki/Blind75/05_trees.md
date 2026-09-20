@@ -945,8 +945,335 @@ print(obj.isSubtree(root, subRoot))    # False
 # S.C: O(max(M,N))         --> Recursion stack, H = height of the root tree
 ```
 
+---
+
+## 11. LeetCode 297: Serialize and Deserialize Binary Tree (Hard)
+
+* **Identified Pattern Upfront:** DFS / Binary Tree
+* **Time Taken:** 42 minutes
+* **Solution Folder:** [`../../Design/297.%20Serialize%20and%20Deserialize%20Binary%20Tree/`](../../Design/297.%20Serialize%20and%20Deserialize%20Binary%20Tree/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/submissions/2147416034)
+
+### Code Solution
+
+```python
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+    # Customize this to show node value during de-bugging
+    def __repr__(self): 
+        return f"{self.val}"
+
+        
+class Codec:
+
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+
+        def dfs(node):
+            # for empty area
+            if not node:    return ["N"]
+
+            # Concatenation of all sub-arrays
+            return [str(node.val)] + dfs(node.left) + dfs(node.right)
+
+        # Joining to create string
+        serialized = ",".join(dfs(root))
+
+        return serialized
+        
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+
+        # Splitting the string to form arary
+        data = data.split(",")
+
+        # Create iterable object
+        vals = iter(data)
+
+        def dfs():
+            # Get next element
+            val = next(vals)
+
+            # Empty node:
+            if val == "N":  return None
+
+            # Creating node
+            node = TreeNode(int(val))
+
+            # Creating left and right childs
+            node.left = dfs()
+            node.right = dfs()
+
+            # Returning root node
+            return node
+        
+        return dfs()
 
 
+# Your Codec object will be instantiated and called as such:
+
+root = TreeNode(1)
+
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+
+root.right.left = TreeNode(4)
+root.right.right = TreeNode(5)
+
+# Driver Execution
+ser = Codec()
+deser = Codec()
+
+serialized_str = ser.serialize(root)
+print("Serialized Output:", serialized_str)
+# Output: "3,9,N,N,20,15,N,N,7,N,N"
+
+ans = deser.deserialize(serialized_str)
+print("Deserialized Root Value:", ans.val)
+# Output: 3
+
+# T.C: O(N)     --> Working on N nodes
+# S.C: O(N)     --> Recursive Call-Stack used for N elements
+```
+
+---
+
+## 12. LeetCode 208: Implement Trie (Prefix Tree) (Medium)
+
+* **Identified Pattern Upfront:** Trie
+* **Time Taken:** 2 minutes
+* **Solution Folder:** [`../../Design/208.%20Implement%20Trie%20(Prefix%20Tree)/`](../../Design/208.%20Implement%20Trie%20(Prefix%20Tree)/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/implement-trie-prefix-tree/submissions/2147450444)
+
+### Code Solution
+
+```python
+class Trie:
+
+    def __init__(self):
+        # Children array
+        self.children = [None] * 26
+        # Indicating end of word
+        self.is_terminal = False
+        
+
+    def insert(self, word: str) -> None:
+        # Pointer for traversal
+        curr = self
+
+        # Looping through word
+        for char in word:
+            # Get index
+            index = ord(char) - ord("a")
+
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
+                curr.children[index] = Trie()
+
+            # If exists, move pointer to it's children
+            curr = curr.children[index]
+
+        # After last char, mark insertion as end
+        curr.is_terminal = True
+
+
+    def search(self, word: str) -> bool:
+        # Pointer for traversal
+        curr = self
+
+        # Looping through word
+        for char in word:
+            # Get index
+            index = ord(char) - ord("a")
+
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
+                return False
+
+            # If exists, move pointer to it's children
+            curr = curr.children[index]
+
+        # After last char, mark searching as end
+        return curr.is_terminal
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        # Pointer for traversal
+        curr = self
+
+        # Looping through word
+        for char in prefix:
+            # Get index
+            index = ord(char) - ord("a")
+
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
+                return False
+
+            # If exists, move pointer to it's children
+            curr = curr.children[index]
+
+        # After last char of prefix, mark searching as end
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+obj = Trie()
+obj.insert("apple")
+print(obj.search("apple"))   # True
+print(obj.search("app"))     # False
+print(obj.startsWith("app")) # True
+obj.insert("app")
+print(obj.search("app"))     # True
+
+"""
+None
+None
+True
+False
+True
+None
+True
+"""
+
+# T.C: O(26 • L • N) --> Looping through word and working for 26-size for each char
+# S.C: insert() → O(26 • L) --> search / startsWith  → O(1)
+```
+
+---
+
+## 13. LeetCode 211: Design Add and Search Words Data Structure (Medium)
+
+* **Identified Pattern Upfront:** Trie
+* **Time Taken:** 18 minutes
+* **Solution Folder:** [`../../Design/211.%20Design%20Add%20and%20Search%20Words%20Data%20Structure/`](../../Design/211.%20Design%20Add%20and%20Search%20Words%20Data%20Structure/)
+* **Submittion Link:** [`Link`](https://leetcode.com/problems/design-add-and-search-words-data-structure/submissions/2147467709)
+
+### Code Solution
+
+```python
+class WordDictionary:
+
+    def __init__(self):
+        # Children array
+        self.children = [None] * 26
+        # Indicating end of word
+        self.is_terminal = False
+
+
+    def addWord(self, word: str) -> None:
+        # Pointer for traversal
+        curr = self
+
+        # Looping through word
+        for char in word:
+            # Get index
+            index = ord(char) - ord("a")
+
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
+                curr.children[index] = WordDictionary()
+
+            # If exists, move pointer to it's children
+            curr = curr.children[index]
+
+        # After last char, mark insertion as end
+        curr.is_terminal = True
+
+
+    def search(self, word: str) -> bool:
+        def dfs(i, node):
+            # Pointer for traversal
+            curr = node
+
+            for j in range(i, len(word)):
+                # Current word
+                char = word[j]
+
+                # WILDCARD case
+                if char == ".":
+                    for child in curr.children:
+                        # If child, recursively check for rest of branch
+                        if child and dfs(j+1, child):
+                            return True
+
+                    return False
+
+                # Standard letter
+                else:
+                    # Get index
+                    index = ord(char) - ord("a")
+        
+                    # If child doesn't exists, create new one
+                    if not curr.children[index]:
+                        return False
+        
+                    # If exists, move pointer to it's children
+                    curr = curr.children[index]
+        
+            # After last char, mark searching as end
+            return curr.is_terminal
+
+        return dfs(0, self)
+
+    
+# Your WordDictionary object will be instantiated and called as such:
+obj = WordDictionary()
+obj.addWord("bad")
+obj.addWord("dad")
+obj.addWord("mad")
+print(obj.search("pad"))    # False
+print(obj.search("bad"))    # True
+print(obj.search(".ad"))    # True
+print(obj.search("b.."))    # True
+
+'''
+None
+None
+None
+False
+True
+True
+True
+'''
+
+# obj.addWord("a")
+# obj.addWord("a")
+# print(obj.search("."))    # True
+# print(obj.search("a"))    # True
+# print(obj.search("aa"))    # False
+# print(obj.search("a"))    # True
+# print(obj.search(".a"))    # False
+# print(obj.search("a."))    # False
+
+'''
+None
+None
+True
+True
+False
+True
+False
+False
+'''
+
+# T.C: addWord() --> O(L) || search() --> Wildcard:Worst-case O(26^d * L), No Wild-card:O(L)
+# S.C: O(N * L)
+```
 
 
 

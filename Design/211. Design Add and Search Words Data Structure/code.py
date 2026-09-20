@@ -1,62 +1,68 @@
 class WordDictionary:
 
     def __init__(self):
+        # Children array
         self.children = [None] * 26
+        # Indicating end of word
         self.is_terminal = False
 
+
     def addWord(self, word: str) -> None:
-        # Get all props in curr
+        # Pointer for traversal
         curr = self
 
+        # Looping through word
         for char in word:
             # Get index
             index = ord(char) - ord("a")
 
-            # If the child doesn't exist, create new
-            if curr.children[index] == None:
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
                 curr.children[index] = WordDictionary()
 
-            # If child exist, move pointer to Trie instance
+            # If exists, move pointer to it's children
             curr = curr.children[index]
-        
-        # Marking the insertion to end
+
+        # After last char, mark insertion as end
         curr.is_terminal = True
 
+
     def search(self, word: str) -> bool:
-        # Set to keep track of all possible Trie nodes
-        current_nodes = {self}  # Start with root
-        
-        for char in word:
-            # This set will collect all valid next states for the upcoming character
-            next_nodes = set()
-            
-            for node in current_nodes:
-                # Handling wildcard
+        def dfs(i, node):
+            # Pointer for traversal
+            curr = node
+
+            for j in range(i, len(word)):
+                # Current word
+                char = word[j]
+
+                # WILDCARD case
                 if char == ".":
-                    # Loop through all 26 possibilities
-                    for child in node.children:
-                        # If a branch exists for this letter, it's a valid path
-                        if child:
-                            next_nodes.add(child)
-                
-                # Handling letters
+                    for child in curr.children:
+                        # If child, recursively check for rest of branch
+                        if child and dfs(j+1, child):
+                            return True
+
+                    return False
+
+                # Standard letter
                 else:
+                    # Get index
                     index = ord(char) - ord("a")
-                    if node.children[index]:
-                        next_nodes.add(node.children[index])
-            
-            # If no valid paths exist for this character, stop early and return False.
-            if not next_nodes:
-                return False
-            
-            # Move to next layer
-            current_nodes = next_nodes
         
-        # Check if any node is terminal
-        return any(node.is_terminal for node in current_nodes)
+                    # If child doesn't exists, create new one
+                    if not curr.children[index]:
+                        return False
+        
+                    # If exists, move pointer to it's children
+                    curr = curr.children[index]
+        
+            # After last char, mark searching as end
+            return curr.is_terminal
 
+        return dfs(0, self)
 
-
+    
 # Your WordDictionary object will be instantiated and called as such:
 obj = WordDictionary()
 obj.addWord("bad")

@@ -1,66 +1,70 @@
 class Trie:
 
     def __init__(self):
+        # Children array
         self.children = [None] * 26
+        # Indicating end of word
         self.is_terminal = False
         
 
     def insert(self, word: str) -> None:
-        # Get all props in curr
+        # Pointer for traversal
         curr = self
 
+        # Looping through word
         for char in word:
             # Get index
             index = ord(char) - ord("a")
 
-            # If the child doesn't exist, create new
-            if curr.children[index] == None:
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
                 curr.children[index] = Trie()
-            
-            # If child exist, move pointer to Trie instance
+
+            # If exists, move pointer to it's children
             curr = curr.children[index]
-        
-        # Marking the insertion to end
+
+        # After last char, mark insertion as end
         curr.is_terminal = True
-       
+
 
     def search(self, word: str) -> bool:
-        # Get all props in curr
+        # Pointer for traversal
         curr = self
 
+        # Looping through word
         for char in word:
             # Get index
             index = ord(char) - ord("a")
 
-            # If the child doesn't exist, means word is not present
-            if curr.children[index] == None:
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
                 return False
-            
-            # If child exist, move pointer to Trie instance
+
+            # If exists, move pointer to it's children
             curr = curr.children[index]
-        
-        # Marking the search to end
+
+        # After last char, mark searching as end
         return curr.is_terminal
         
 
     def startsWith(self, prefix: str) -> bool:
-        # Get all props in curr
+        # Pointer for traversal
         curr = self
 
+        # Looping through word
         for char in prefix:
             # Get index
             index = ord(char) - ord("a")
 
-            # If the child doesn't exist, means word is not present
-            if curr.children[index] == None:
+            # If child doesn't exists, create new one
+            if not curr.children[index]:
                 return False
-            
-            # If child exist, move pointer to Trie instance
+
+            # If exists, move pointer to it's children
             curr = curr.children[index]
-        
-        # Word starts with prefix
+
+        # After last char of prefix, mark searching as end
         return True
-        
 
 
 # Your Trie object will be instantiated and called as such:
@@ -82,5 +86,5 @@ None
 True
 """
 
-# T.C: O(26 ⋅ L ⋅ N) , Looping through word and working for 26-size for each char
-# S.C: insert() → O(26 ⋅ L) , search / startsWith  → O(1)
+# T.C: O(26 • L • N) --> Looping through word and working for 26-size for each char
+# S.C: insert() → O(26 • L) --> search / startsWith  → O(1)

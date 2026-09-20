@@ -48,4 +48,7 @@ This deliverable includes the famous `Blind-75` problem set. All details are ins
 ### 📌 Deliverable Quick Links
 
 * **Part 1: Arrays:** [`./Wiki/Blind75/01_arrays.md`](./Wiki/Blind75/01_arrays.md)
-* **Part 2: Strings:** [`./Wiki/Blind75/2_strings.md`](./Wiki/Blind75/02_strings.md)
+* **Part 2: Strings:** [`./Wiki/Blind75/02_strings.md`](./Wiki/Blind75/02_strings.md)
+* **Part 3: Linked List:** [`./Wiki/Blind75/03_linked-list.md`](./Wiki/Blind75/03_linked-list.md)
+* **Part 4: Matrix:** [`./Wiki/Blind75/04_matrix.md`](./Wiki/Blind75/04_matrix.md)
+* **Part 5: Trees:** [`./Wiki/Blind75/05_trees.md`](./Wiki/Blind75/05_trees.md)
