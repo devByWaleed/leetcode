@@ -70,19 +70,22 @@ print(obj.climbStairs(3))       # 3
 # Tabulation
 class Solution:
     def climbStairs(self, n: int) -> int:
-        # DP table, (n+1)th position holds answer
-        dp = [0] * (n + 1)
+        # Edge case
+        if n == 1:
+            return 1
         
-        # Set default values
+        # DP table for (n+1)th position
+        dp = [0] * (n+1)
+
+        # Default values
         dp[1] = 1
         dp[2] = 2
-        
-        # Looping till n
+
         for i in range(3, n+1):
-            # Running sum calculation
+            # running sum for both 1 step & 2 steps
             dp[i] = dp[i-1] + dp[i-2]
 
-        # Return answer
+        # Last element stores answer
         return dp[n]
 
 
@@ -90,8 +93,8 @@ obj = Solution()
 print(obj.climbStairs(2))       # 2
 print(obj.climbStairs(3))       # 3
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(N)     --> Running loop on N numbers
+# S.C: O(N)     --> DP array of N size used
 
 
 

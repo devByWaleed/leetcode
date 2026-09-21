@@ -93,24 +93,30 @@ print(obj.coinChange([1], 0))                   # 0
 
 
 # Tabulation
+from typing import List
+
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        # DP table, (amount + 1)th position holds answer
-        dp = [amount + 1] * (amount + 1)
+        # (amount+1) ~ inf
+        dp = [amount+1] * (amount+1)
 
-        # Set default values
+        # 0 coins for 0 amount
         dp[0] = 0
 
-        # Looping on amount range
-        for a in range(1, amount + 1):
-
-            # Looping through all coins
+        for a in range(1, amount+1):
             for c in coins:
+                # If amount doesn't become -ve
                 if a - c >= 0:
-                    # Set minimum coins
-                    dp[a] = min(dp[a], 1 + dp[a - c])
-        
-        # If get lower coins, return it. Else return -1
+                    # Without coin c
+                    con1 = dp[a]
+
+                    # With coin + pre-calculated
+                    con2 = 1 + dp[a - c]
+
+                    # Minimum number of coins
+                    dp[a] = min(con1, con2)
+
+        # Return coins if combination made else -1
         return dp[amount] if dp[amount] != amount + 1 else -1
 
 
@@ -118,3 +124,6 @@ obj = Solution()
 print(obj.coinChange([1, 2, 5], 11))            # 3
 print(obj.coinChange([2], 3))                   # -1
 print(obj.coinChange([1], 0))                   # 0
+
+# T.C: O(N)     --> Running loop amount times + N coins
+# S.C: O(amount)     --> DP array of "amount" size used
