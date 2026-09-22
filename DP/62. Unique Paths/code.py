@@ -107,14 +107,13 @@ print(obj.uniquePaths(23, 12))           # 193536720
 # Tabulation (Space optimized)
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-
-        # DP table, (m,n)th position holds answer
+        # DP table, last position holds answer
         dp = [1] * (n)
 
-        # Looping till (m,n)
+        # Looping (1,n) m-1 times
         for _ in range(m - 1):
             for j in range(1, n):
-            
+                # Update unique paths: with sum of prev + curr
                 dp[j] = dp[j] + dp[j-1]
 
         # Return answer
@@ -126,5 +125,5 @@ print(obj.uniquePaths(3, 7))             # 28
 print(obj.uniquePaths(3, 2))             # 3
 print(obj.uniquePaths(23, 12))           # 193536720
 
-# T.C: O(M * N)
-# S.C: O(M * N)
+# T.C: O(M * N)     --> Looping on grid
+# S.C: O(M * N)     --> 1-D DP array

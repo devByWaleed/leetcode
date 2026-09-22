@@ -52,3 +52,4 @@ This deliverable includes the famous `Blind-75` problem set. All details are ins
 * **Part 3: Linked List:** [`./Wiki/Blind75/03_linked-list.md`](./Wiki/Blind75/03_linked-list.md)
 * **Part 4: Matrix:** [`./Wiki/Blind75/04_matrix.md`](./Wiki/Blind75/04_matrix.md)
 * **Part 5: Trees:** [`./Wiki/Blind75/05_trees.md`](./Wiki/Blind75/05_trees.md)
+* **Part 6: Dynamic Programming:** [`./Wiki/Blind75/06_dp.md`](./Wiki/Blind75/06_dp.md)

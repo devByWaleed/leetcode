@@ -101,55 +101,57 @@ class Solution:
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
         
+        # Edge case: Single house
         if n == 1:
             return nums[0]
-        
-        def solve(houses):
-            n_sub = len(houses)
-            
+
+        def rob_helper(nums, start, end):
+            length = end - start
+
             # If the slice is empty (happens with very small inputs)
-            if n_sub == 0: return 0
+            if length == 0: return 0
             # If the slice has one house, max is just that house
-            if n_sub == 1: return houses[0]
-            
-            # DP table, (n)th position holds answer
-            dp = [0] * (len(houses))
+            if length == 1: return nums[start]
 
-            # Set default values
-            dp[0] = houses[0]
-            dp[1] = max(houses[0], houses[1])
+            # DP array
+            dp = [0] * length
 
-            # Looping till n
-            for i in range(2, n_sub):
-                # Skip: Adjacent
+            # Set default robbed values
+            dp[0] = nums[start]
+            dp[1] = max(nums[start], nums[start+1])
+
+            for i in range(2, length):
+                # SKIP
                 skip = dp[i-1]
-                
-                # Rob: Current & 2nd previous
-                rob = houses[i] + dp[i-2]
-                
-                # Max money should be robbed
+
+                # ROB: Ignore adjacent house
+                # Mapped i to nums index
+                rob = nums[start+i] + dp[i-2]
+
+                # Save maximum amount
                 dp[i] = max(skip, rob)
 
-            # Return answer
-            return dp[-1]
-    
-        # Return the answer      
-        return max(
-            # Exclude 1st house
-            solve(nums[1:]),
-            
-            # Exclude last house 
-            solve(nums[:-1])
-        )
-    
+            # Last index holds answer
+            return dp[length-1]
+
+        # SKIP last house
+        con1 = rob_helper(nums, 0, n-1)
+
+        # SKIP 1st house
+        con2 = rob_helper(nums, 1, n)
+
+        # MAX from circular condition
+        return max(con1, con2)
+
 
 obj = Solution()
 print(obj.rob([2, 3, 2]))            # 3
 print(obj.rob([1, 2, 3, 1]))         # 4
 print(obj.rob([1, 2, 3]))            # 3
+print(obj.rob([1, 2, 1, 1]))            # 3
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(N)     --> Running loop on N numbers
+# S.C: O(N)     --> DP array of N size used
 
 
 

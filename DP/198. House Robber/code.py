@@ -86,38 +86,38 @@ print(obj.rob([2, 7, 9, 3, 1]))         # 12
 class Solution:
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
-        
-        # DP table, (n)th position holds answer
-        dp = [0] * (n)
 
+        # Edge case
         if n == 1:
             return nums[0]
 
-        # Set default values
+        # DP array
+        dp = [0] * n
+
+        # Set default robbed values
         dp[0] = nums[0]
         dp[1] = max(nums[0], nums[1])
 
-        # Looping till n
         for i in range(2, n):
-            # Skip: Adjacent
+            # SKIP
             skip = dp[i-1]
-            
-            # Rob: Current & 2nd previous
+
+            # ROB: Ignore adjacent house
             rob = nums[i] + dp[i-2]
-            
-            # Max money should be robbed
+
+            # Save maximum amount
             dp[i] = max(skip, rob)
 
-        # Return answer
+        # Last index holds answer
         return dp[n-1]
 
-
+    
 obj = Solution()
 print(obj.rob([1, 2, 3, 1]))            # 4
 print(obj.rob([2, 7, 9, 3, 1]))         # 12
 
-# T.C: O(N)
-# S.C: O(N)
+# T.C: O(N)     --> Running loop on N numbers
+# S.C: O(N)     --> DP array of N size used
 
 
 
