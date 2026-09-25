@@ -3,40 +3,35 @@ from typing import List
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         n = len(candidates)
-                
-        # Stores final answer
-        result = []
-        
-        # Stores single pairs
-        comb = []
 
-        # Track current total
+        result, comb = [], []
         total = 0
 
-
-        def backtrack(i, total):
-            # Base case to add into result
+        def backtrack(i,total):
+            # Base condition
             if total == target:
                 result.append(comb.copy())
                 return
 
-            # Invalid Sum conditions
+            # Invalid sum condition
             if i == n or total > target:
                 return
-            
-            # Backtrack: Include this number
-            comb.append(candidates[i])
-            backtrack(i, total + candidates[i])
 
-            # POP ( UNDO )
+            # Add to comb
+            comb.append(candidates[i])
+
+            # Cond1: Picked & backtrack
+            backtrack(i, total+candidates[i])
+
+            # UNDO
             comb.pop()
 
-            # Backtrack: Skip this number
-            backtrack(i+1, total)
+            # Cond2: Not Picked
+            backtrack(i+1,total)
 
+        # Start backtracking
+        backtrack(0,total)
 
-        # Call function with initial value
-        backtrack(0, total)
         return result
 
 
