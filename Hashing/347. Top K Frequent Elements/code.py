@@ -1,3 +1,47 @@
+# HashMap + Min-Heap
+
+from typing import List
+import heapq
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # Store frequencies
+        frequencies = {}
+
+        # MinHeap for Top K, result for final answer
+        min_heap, result = [], []
+
+        # 1: Store frequencies
+        for i in nums:
+            frequencies[i] = frequencies.get(i, 0) + 1
+
+        # 2: Update MinHeap with Top K Frequent elements
+        for num, frequency in frequencies.items():
+            heapq.heappush(min_heap, (frequency, num))
+
+            # If size exceeded, remove smallest one
+            if len(min_heap) > k:
+                heapq.heappop(min_heap)
+
+        # 3: Add the actual number to result
+        for pair in min_heap:
+            result.append(pair[1])
+
+        return result
+
+
+obj = Solution()
+print(obj.topKFrequent([1, 1, 1, 2, 2, 3], 2))       # [1, 2]
+print(obj.topKFrequent([1], 1))                      # [1]
+print(obj.topKFrequent([3, 0, 1, 0], 1))             # [0]
+
+# T.C: O(N log K)   --> Main MinHeap of K elements for N total numbers
+# S.C: O(N)         --> MinHeap + result array used
+
+
+
+# HashMap + Sorting
+"""
 from typing import List
 
 '''
@@ -48,3 +92,4 @@ print(obj.topKFrequent([3, 0, 1, 0], 1))             # [0]
 
 # T.C: O(N log N)
 # S.C: O(N)
+"""

@@ -3,43 +3,39 @@ import heapq
 class MedianFinder:
 
     def __init__(self):
-        # MAX HEAP
-        self.small = []
-        # MIN HEAP
-        self.large = []
-
+        self.min_heap = []
+        self.max_heap = []
+        
 
     def addNum(self, num: int) -> None:
-        # Add to MAX HEAP firstly
-        heapq.heappush(self.small, -num)
+        # ADD to MAX-Heap first
+        heapq.heappush(self.max_heap, -num)
 
-        # Maintaining order
-        if self.small and self.large and (-self.small[0] > self.large[0]):
-            val = -heapq.heappop(self.small)
-            heapq.heappush(self.large, val)
+        # MAX-Heap's largest <= MIN-Heap's smallest 
+        if self.max_heap and self.min_heap and (-self.max_heap[0] > self.min_heap[0]):
+            val = -heapq.heappop(self.max_heap)
+            heapq.heappush(self.min_heap, val)
 
-        # Maintaining length
-        if len(self.large) > len(self.small) + 1:
-            val = heapq.heappop(self.large)
-            heapq.heappush(self.small, -val)
+        # Balancing length
+        if len(self.max_heap) > len(self.min_heap) + 1:
+            val = -heapq.heappop(self.max_heap)
+            heapq.heappush(self.min_heap, val)
+
+        elif len(self.min_heap) > len(self.max_heap):
+            val = heapq.heappop(self.min_heap)
+            heapq.heappush(self.max_heap, -val)
         
-        if len(self.small) > len(self.large) + 1:
-            val = -heapq.heappop(self.small)
-            heapq.heappush(self.large, val)
-
-
+        
     def findMedian(self) -> float:
-        # Median of odd size
-        if len(self.small) > len(self.large):
-            return -self.small[0]
+        # ODD count
+        if len(self.max_heap) > len(self.min_heap):
+            return float(-self.max_heap[0])
         
-        if len(self.large) > len(self.small):
-            return self.large[0]
-        
-        # Median of even size
-        return (-self.small[0] + self.large[0]) / 2
-        
+        # EVEN count
+        else:
+            return (-self.max_heap[0] + self.min_heap[0]) / 2.0
 
+        
 # Your MedianFinder object will be instantiated and called as such:
 obj = MedianFinder()
 
