@@ -1,4 +1,4 @@
-# Blind 75 Part 6: Heap
+# Blind 75 Part 7: Heap
 
 This part contains problems related to `Heap`
 
