@@ -31,5 +31,5 @@ obj = Solution()
 print(obj.getSum(1, 2))     # 3
 print(obj.getSum(2, 3))     # 5
 
-# T.C: O(1)
-# S.C: O(1)
+# T.C: O(1)     --> Looping is constant
+# S.C: O(1)     --> No data structure used

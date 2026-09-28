@@ -17,5 +17,5 @@ obj = Solution()
 print(obj.reverseBits(43261596))      # 964176192
 print(obj.reverseBits(2147483644))      # 1073741822
 
-# T.C: O(1)
-# S.C: O(1)
+# T.C: O(1)     --> Looping 32 times (constant)
+# S.C: O(1)     --> No data structure used
