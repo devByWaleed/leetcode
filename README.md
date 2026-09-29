@@ -43,7 +43,7 @@ This deliverable proves pattern mastery across 10 foundational coding patterns, 
 
 This deliverable includes the famous `Blind-75` problem set. All details are inside `Wiki/Blind75` folder.
 
-[`Blind 75 Link: `](https://leetcode.com/discuss/post/460599/blind-75-leetcode-questions-by-krishnade-9xev/)
+[`Blind 75 List: `](https://leetcode.com/discuss/post/460599/blind-75-leetcode-questions-by-krishnade-9xev/)
 
 ### 📌 Deliverable Quick Links
 
@@ -53,3 +53,7 @@ This deliverable includes the famous `Blind-75` problem set. All details are ins
 * **Part 4: Matrix:** [`./Wiki/Blind75/04_matrix.md`](./Wiki/Blind75/04_matrix.md)
 * **Part 5: Trees:** [`./Wiki/Blind75/05_trees.md`](./Wiki/Blind75/05_trees.md)
 * **Part 6: Dynamic Programming:** [`./Wiki/Blind75/06_dp.md`](./Wiki/Blind75/06_dp.md)
+* **Part 7: Heap:** [`./Wiki/Blind75/07_heap.md`](./Wiki/Blind75/07_heap.md)
+* **Part 8: Intervals:** [`./Wiki/Blind75/08_intervals.md`](./Wiki/Blind75/08_intervals.md)
+* **Part 9: Bitwise:** [`./Wiki/Blind75/09_bitwise.md`](./Wiki/Blind75/09_bitwise.md)
+* **Part 10: Graphs:** [`./Wiki/Blind75/10_graph.md`](./Wiki/Blind75/10_graph.md)

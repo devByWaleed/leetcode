@@ -5,33 +5,34 @@ class Solution:
         # directions = [(0,-1), (0,1), (-1,0), (1,0)]
 
         def explore(grid, r, c, visited):
-            # Edge case: Index out of range
+            # Edge case: Index checking
             row_inbound = 0 <= r and r < len(grid)
             col_inbound = 0 <= c and c < len(grid[0])
 
+            # Checking Index out of bound
             if not row_inbound or not col_inbound:
                 return False
-            
-            # If water, then there is no island
+
+            # If value is water
             if grid[r][c] == "0":
                 return False
 
+            # Initialize pos
             pos = f"{r},{c}"
 
-            # Already checked
+            # If this pos already check
             if pos in visited:
                 return False
 
-            # Add to set to keep track
+            # Add to visited
             visited.add(pos)
 
-            # Explore all 4 directions
-            explore(grid, r, c-1, visited)      # LEFT
-            explore(grid, r, c+1, visited)      # RIGHT
-            explore(grid, r-1, c, visited)      # UP
-            explore(grid, r+1, c, visited)      # DOWN
+            # Backtrack for all 4 directions: UP, DOWN, LEFT, RIGHT
+            explore(grid, r-1, c, visited)
+            explore(grid, r+1, c, visited)
+            explore(grid, r, c-1, visited)
+            explore(grid, r, c+1, visited)
 
-            # After exploration, we found Island
             return True
 
         # Set to break infinite loop
