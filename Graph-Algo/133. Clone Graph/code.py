@@ -93,5 +93,5 @@ cloned_3 = obj.cloneGraph(empty_graph)
 print("\n--- TEST CASE 3 ---")
 print(f"Cloned Graph: {cloned_3}")
 
-# T.C: O(V + E)
-# S.C: O(V)
+# T.C: O(V + E)     --> Working on Vertices + Edges
+# S.C: O(V)         --> Call-Stack for Vertices used

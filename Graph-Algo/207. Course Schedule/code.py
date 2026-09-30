@@ -45,5 +45,5 @@ obj = Solution()
 print(obj.canFinish(2, [[1,0]]))           # -> True
 print(obj.canFinish(2, [[1,0],[0,1]]))     # -> False
 
-# T.C: O(V + E)
-# S.C: O(V + E)
+# T.C: O(V + E)     --> Looping over Vertices + Edges
+# S.C: O(V + E)     --> collection of Vertices, Edges stored
